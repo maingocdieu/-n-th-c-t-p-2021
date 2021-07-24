@@ -1,0 +1,14 @@
+.customImg {
+  width: 100%;
+  height: 400px !important;
+}
+
+.selected {
+  background-color: saddlebrown;
+  color: white !important;
+}
+
+.custom-nav-link:hover {
+  background-color: black;
+  color: white !important;
+}

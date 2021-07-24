@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { async } from '@angular/core/testing';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProductService } from 'src/app/_services/product.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductDetailComponent implements OnInit {
 
-  constructor() { }
+  product: any;
+  constructor(private activateRoute: ActivatedRoute, private productService: ProductService,
+    private router: Router) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    await this.getProduct();
+    console.log(this.product);
+  }
+
+  async getProduct() {
+    let id: any;
+    await this.activateRoute.paramMap.subscribe(params => {
+      id = params.get('id');
+    });
+
+  this.product = await this.productService.getById(id).toPromise();
+ 
   }
 
 }

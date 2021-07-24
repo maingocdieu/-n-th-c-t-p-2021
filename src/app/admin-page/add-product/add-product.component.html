@@ -1,0 +1,131 @@
+<div class="addproduct">
+  <div class="addproduct__title">Mange Product</div>
+  <div class="addproduct__head">
+    <i class="fa fa-home" aria-hidden="true"> </i>
+    <span class="pesudu"> / Home / </span>
+    <span class="pesudu"> Add product</span>
+  </div>
+  <div class="addproduct__form">
+    <div class="addproduct__form-head">Add Product</div>
+    <div class="addproduct__form-cotainer">
+      <form class="formaddProduct" [formGroup]="productForm">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="fullname" class="form-label">Category</label>
+            <select
+              class="form-control"
+              aria-label="Default select example"
+              formControlName="category"
+              (blur)="logKeyValuePairs()"
+            >
+              <option
+                *ngFor="let category of categorys"
+                [value]="category.code"
+              >
+                {{ category.name }}
+              </option>
+              >
+            </select>
+            <span *ngIf="formErrors.category" class="alert-danger">
+              {{ formErrors.category }}</span
+            >
+          </div>
+          <div class="form-group col-md-6">
+            <label for="">Product Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id=""
+              placeholder="Product name"
+              formControlName="productName"
+              [placeholder]="product.nameProduct"
+              (blur)="logKeyValuePairs()"
+            />
+            <span *ngIf="formErrors.productName" class="alert-danger">
+              {{ formErrors.productName }}</span
+            >
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="">Price</label>
+            <input
+              type="email"
+              class="form-control"
+              id=""
+              placeholder="Price"
+              formControlName="price"
+              [placeholder]="product.price"
+              (blur)="logKeyValuePairs()"
+            />
+            <span
+              *ngIf="formErrors.price"
+              class="alert-danger"
+              style="padding-top: 2px"
+            >
+              {{ formErrors.price }}</span
+            >
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">Description</label>
+            <input
+              type="text"
+              class="form-control"
+
+              placeholder="Description"
+              formControlName="describe"
+              [placeholder]="product.describe"
+              (blur)="logKeyValuePairs()"
+            />
+            <span *ngIf="formErrors.describe" class="alert-danger">
+              {{ formErrors.describe }}</span
+            >
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">Image</label>
+            <div class="div__upload">
+              <div class="input-group form-select">
+                <input
+                  formControlName="Image"
+                  type="file"
+                  class="form-control"
+                  id="inputGroupFile04"
+                  aria-describedby="inputGroupFileAddon04"
+                  aria-label="Upload"
+                  (change)="readURL($event)"
+                  (blur) ="logKeyValuePairs()"
+
+                  required
+                />
+                <span
+                  *ngIf="formErrors.Image"
+                  class="alert-danger"
+                  style="padding-top: 2px"
+                >
+                  {{ formErrors.Image }}</span
+                >
+              </div>
+              <div class="see__image">
+                <img
+                  id="blah"
+                  [src]="imageSrc || 'http://placehold.it/180'"
+                  alt="your image"
+                  class="imgUpload"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn__add">
+          <button class="form-cancel" (click)="back()">Cancel</button>
+          <button class="form-submit" (click)="insertProduct()">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div>
+  <div style="padding: 15px 10px;background-color: darkgreen; color: white;">Danh mục sản phẩm</div>
+  <nav class="navbar bg-light" style="align-items: flex-start;">
+    <ul class="navbar-nav" style="background-color: #FF6F61 !important; height: 100%;">
+      <li class="nav-item" *ngFor="let item of categorys" style="padding: 0px;" >
+        <a class="nav-link custom-nav-link" (click) = "getProduct(item.id)"
+          style="color: white;"><i></i>{{item.name}}</a>
+      </li>
+    </ul>
+  </nav>
+</div>

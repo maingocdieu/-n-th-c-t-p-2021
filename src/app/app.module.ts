@@ -3,40 +3,35 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './user-page/header/header.component';
-import { FooterComponent } from './user-page/footer/footer.component';
-import { ProductComponent } from './user-page/product/product.component';
-import { CheckoutComponent } from './user-page/checkout/checkout.component';
-import { CartComponent } from './user-page/cart/cart.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { UerAdminComponent } from './admin-page/uer-admin/uer-admin.component';
-import { ProductAdminComponent } from './admin-page/product-admin/product-admin.component';
-import { HeaderAdminComponent } from './admin-page/header-admin/header-admin.component';
-import { FooterAdminComponent } from './admin-page/footer-admin/footer-admin.component';
-import { AdminSidebarComponent } from './admin-page/admin-sidebar/admin-sidebar.component';
 
+
+import { FormsModule} from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { CanActivateRouteGuard } from './can-activate-route.guard';
+import { AdminModule } from './admin-page/admin.module';
+import { UserModule } from './user-page/user.module';
+import { HeaderComponent } from './user-page/header/header.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    ProductComponent,
-    CheckoutComponent,
-    CartComponent,
     LoginComponent,
     RegisterComponent,
-    UerAdminComponent,
-    ProductAdminComponent,
-    HeaderAdminComponent,
-    FooterAdminComponent,
-    AdminSidebarComponent
+
+ 
+   
+   
   ],
   imports: [
+    FormsModule,
+    HttpClientModule,
     BrowserModule,
+    UserModule,
+    AdminModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [CanActivateRouteGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

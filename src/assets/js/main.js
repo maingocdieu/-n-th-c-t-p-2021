@@ -1,7 +1,7 @@
 (function ($) {
     "use strict";
     
-    // // Dropdown on mouse hover
+    // Dropdown on mouse hover
     // $(document).ready(function () {
     //     function toggleNavbarMethod() {
     //         if ($(window).width() > 768) {
@@ -31,6 +31,7 @@
     //     $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
     //     return false;
     // });
+    
     
     
     // Header slider
