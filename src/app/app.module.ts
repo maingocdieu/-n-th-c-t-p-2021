@@ -12,16 +12,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { CanActivateRouteGuard } from './can-activate-route.guard';
 import { AdminModule } from './admin-page/admin.module';
 import { UserModule } from './user-page/user.module';
-import { HeaderComponent } from './user-page/header/header.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-
- 
-   
-   
   ],
   imports: [
     FormsModule,

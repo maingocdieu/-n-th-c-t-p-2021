@@ -12,6 +12,7 @@ import { UserPageComponent } from './user-page.component';
 import { HomeComponent } from './home/home.component';
 import { CategoryComponent } from './category/category.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { CardStatusComponent } from './card-status/card-status.component';
 
 
 
@@ -24,8 +25,9 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
     ProductListComponent,
     ProductDetailComponent,
     CategoryComponent,
+    CardStatusComponent,
     HomeComponent,
-
+  
     UserPageComponent    
   ],
   imports: [

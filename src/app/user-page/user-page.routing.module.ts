@@ -6,6 +6,8 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { UserPageComponent } from './user-page.component';
 import { HomeComponent } from './home/home.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { CardStatusComponent } from './card-status/card-status.component';
+import { CartComponent } from './cart/cart.component';
 
 
 
@@ -18,6 +20,10 @@ const UserRoutes: Routes = [
         path: '',
         component: HomeComponent,
         
+      },
+      {
+        path : 'cart',
+        component: CartComponent
       },
 
       {

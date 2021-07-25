@@ -1,0 +1,11 @@
+
+  <div class="user">
+      <a href="wishlist.html" class="btn wishlist">
+          <i class="fa fa-heart"></i>
+          <span>{{ totalPrice | currency: 'USD' }}</span>
+      </a>
+      <a routerLink="/cart" class="btn cart">
+          <i class="fa fa-shopping-cart"></i>
+          <span>{{ totalQuantity }}</span>
+      </a>
+  </div>

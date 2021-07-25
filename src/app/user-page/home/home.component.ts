@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {  Router } from '@angular/router';
+import { CartItem } from 'src/app/model/cart-item';
+import { CartService } from 'src/app/_services/cart.service';
 import { CategoryService } from 'src/app/_services/category.service';
 import { ProductService } from 'src/app/_services/product.service';
 
@@ -26,7 +28,8 @@ export class HomeComponent implements OnInit {
   constructor(
     public productService: ProductService,
     public categoryService: CategoryService,
-    public router: Router) { 
+    public router: Router,
+    private cartService: CartService,) { 
   }
 
   ngOnInit(): void {
@@ -98,4 +101,15 @@ export class HomeComponent implements OnInit {
   getDetailProduct(id) {
     this.router.navigateByUrl("product/"+ id)
   }
+
+  addToCart(theProduct: any) {
+    
+    console.log(`Adding to cart: ${theProduct.name}, ${theProduct.unitPrice}`);
+
+    // TODO ... do the real work
+    const theCartItem = new CartItem(theProduct);
+
+    this.cartService.addToCart(theCartItem);
+  }
+
 }

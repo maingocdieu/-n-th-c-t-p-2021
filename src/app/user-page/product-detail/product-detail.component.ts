@@ -11,6 +11,7 @@ import { ProductService } from 'src/app/_services/product.service';
 export class ProductDetailComponent implements OnInit {
 
   product: any;
+  quantity = 0;
   constructor(private activateRoute: ActivatedRoute, private productService: ProductService,
     private router: Router) { }
 
@@ -29,4 +30,16 @@ export class ProductDetailComponent implements OnInit {
  
   }
 
+  inCrease() {
+       this.quantity++;
+       
+  }
+
+  deCrease() {
+      
+      if(this.quantity < 1) {
+        return;
+      }
+      this.quantity--;
+  }
 }
