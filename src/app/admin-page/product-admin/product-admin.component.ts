@@ -16,9 +16,8 @@ export class ProductAdminComponent implements OnInit {
 
   ngOnInit(): void {
    
-    this.productService.readAllProduct().subscribe((res) => {
+    this.productService.readListProduct().subscribe((res) => {
       this.products =res;
-      console.log(this.products);
      })
   }
 

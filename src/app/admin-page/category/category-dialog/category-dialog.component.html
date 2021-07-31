@@ -1,0 +1,33 @@
+<div class="div">
+  <mat-icon id="close-icon" class="icon__close" style="color: red" (click)="closeDialog()">close</mat-icon>
+  <form [formGroup]="categoryForm">
+    <div class="row mb-3">
+
+      <label for="inputEmail3" class="col-sm-2 col-form-label">Name</label>
+
+
+      <div class="col-sm-10">
+        <input type="text" class="form-control" formControlName="nameCategory" [(ngModel)]="category.name" />
+        <label style="color: red;" *ngIf="f.nameCategory.errors?.required && f.nameCategory.touched" class="error">
+          Tên loại sản phẩm phải bắt buộc
+        </label>
+        <label style="color: red;" *ngIf="f.nameCategory.errors?.courseExist" class="error">
+          Loại sản phẩm đã tồn tại
+        </label>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="inputPassword3" class="col-sm-2 col-form-label">Code</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" formControlName="codeCategory" [(ngModel)]="category.code" />
+        <label style="color: red;" *ngIf="f.codeCategory.invalid && f.codeCategory.touched" class="error">
+          Mã sản phẩm phải bắt buộc
+        </label>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary category__addbutton" [disabled]="!categoryForm.valid"
+      [mat-dialog-close]="category">
+      {{buttonName}}
+    </button>
+  </form>
+</div>

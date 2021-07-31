@@ -9,9 +9,11 @@ import { TokenStorageService } from 'src/app/_services/token-storage.service';
 })
 export class HeaderAdminComponent implements OnInit {
 
-  constructor(private tokenStorageService: TokenStorageService, private router: Router) { }
+  constructor(private tokenStorageService: TokenStorageService, private router: Router,private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
+
+    console.log(this.tokenStorage.getUser());
   }
 
   logout(): void {

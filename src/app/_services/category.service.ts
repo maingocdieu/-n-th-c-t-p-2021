@@ -15,6 +15,7 @@ export class CategoryService {
     return this.httpClient.get(baseURL);
   }
   createCategory(data: any): Observable<any> {
+    
     return this.httpClient.post(baseURL, data);
   }
 

@@ -1,5 +1,4 @@
-
-<div class="breadcrumb-wrap">
+<!-- <div class="breadcrumb-wrap">
   <div class="container-fluid">
       <ul class="breadcrumb">
           <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -36,5 +35,43 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 <!-- Login End -->
+<div class="main">
+  <form action="" method="POST" class="form" id="form-2"  name="form"
+    (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+    <h3 class="heading">Đăng nhập</h3>
+    <p class="desc">Cùng nhau mua sắm tại Shop ❤️</p>
+
+    <div class="spacer"></div>
+
+    <div class="form-group">
+      <label for="email" class="form-label">Email</label>
+      <input id="email" name="email" type="text" placeholder="VD: email@domain.com" class="form-control"
+        class="form-control" name="username" [(ngModel)]="form.username" required #username="ngModel">
+      <div class="form-message" *ngIf="f.submitted && username.invalid" style="color: red;">Bạn cần nhập username</div>
+    </div>
+
+    <div class="form-group">
+      <label for="password" class="form-label">Mật khẩu</label>
+      <input id="password"  type="password" placeholder="Nhập mật khẩu" class="form-control"
+         class="form-control" name="password" [(ngModel)]="form.password" required minlength="6"
+        #password="ngModel">
+        <div style="margin-left: 0; text-align: left; color: red;" *ngIf="f.submitted && password.invalid">
+          <span class="form-message" *ngIf="password.errors.required">Password is required</span>
+          <span class="form-message" *ngIf="password.errors.minlength">
+            Password must be at least 6 characters
+          </span>
+        </div>
+    </div>
+
+    <button class="form-submit">Đăng nhập</button>
+    <div class="form-group">
+      <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">
+        Tên đăng nhập hoặc mật khẩu sai
+      </div>
+    </div>
+    <a [routerLink]="['/register']">Chưa có tài khoản đăng kí</a>
+  </form>
+  
+</div>

@@ -1,0 +1,47 @@
+<h1>dâdada</h1>
+
+<div class="main__container" style="width: 1200px; margin-left: 40px;">
+  <div class="product__header">
+    <div class="product__header-bg">
+      <i class="fa fa-home" aria-hidden="true"> </i>
+      <span class="pesudu"> / Home / </span>
+      <span class="pesudu"> Category</span>
+    </div>
+  </div>
+  <div class="product__list">
+    <div class="table_product">
+      <div class="button__adduser">
+        <button class="user__add btn__user" (click)="addandUpdateCategory(null)" >
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          <span>New Categoy</span>
+        </button>
+        <button class="btn__user user__delete"(click)="showConfirmDeleteDialog()">
+          <i class="fa fa-trash" aria-hidden="true"></i>
+          <span>Delete</span>
+        </button>
+      </div>
+      <table class="table" >
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Name category</th>
+            <th scope="col">Code</th>
+            <th>Action</th>
+            <th>
+              <input type="checkbox" (change)="checkUncheckAll()"  />
+            </th>
+          </tr>
+        </thead>
+        <tbody >
+          <tr *ngFor="let category of categorys">
+            <td>{{category.name}}</td>
+            <td>{{category.code}}</td>
+            <td> <a ><i class="fa fa-pencil-square-o" aria-hidden="true" (click)="addandUpdateCategory(category)"></i></a>aa</td>
+            <td><input type="checkbox" class="checkbox"[(ngModel)]="category.isSelected" name="list_name" value="{{category.id}}" (change)="isAllSelected() "/></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<app-dialog #confirmDeleteDialog (yesClicked)="deleteCategory()"></app-dialog>
+<app-alert #alertDeleteDialog ></app-alert>

@@ -6,6 +6,8 @@ import { AdminPageComponent } from './admin-page.component';
 import { ProductAdminComponent } from './product-admin/product-admin.component';
 import { CanActivateRouteGuard } from '../can-activate-route.guard';
 import { AddProductComponent } from './add-product/add-product.component';
+import { AddGoodsNoteComponent } from './add-goods-note/add-goods-note.component';
+import { AddCategoryComponent } from './category/add-category/add-category.component';
 
 
 const AdminRoutes: Routes = [
@@ -21,6 +23,14 @@ const AdminRoutes: Routes = [
       {
         path:'addProduct',
         component: AddProductComponent
+      },
+      {
+        path: 'phieuNhap',
+        component: AddGoodsNoteComponent
+      },
+      {
+         path: 'addCategory',
+         component: AddCategoryComponent
       }
     ]
   },

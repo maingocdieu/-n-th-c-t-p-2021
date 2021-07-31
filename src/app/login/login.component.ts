@@ -38,11 +38,9 @@ export class LoginComponent implements OnInit {
           window.location.replace("home");
         } else if (this.roles[0] === "ROLE_ADMIN") {
           this.router.navigateByUrl("admin");
-          window.location.replace("admin");
+         // window.location.replace("admin");
+          console.log(this.tokenStorage.getUser());
         }
-
-           
-        // this.reloadPage();
       },
       err => {
         this.errorMessage = err.error.message;

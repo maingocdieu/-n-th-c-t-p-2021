@@ -14,6 +14,13 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) {}
 
+  insertPhieuNhap(data: any): Observable<any> {
+    return this.httpClient.post(baseURL +"/"+ "insertPhieuNhap", data, {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+  }
   readAllProduct(): Observable<any> {
     return this.httpClient.get(baseURL);
   }
@@ -45,7 +52,10 @@ export class ProductService {
     return this.httpClient.get("http://localhost:8080/api/product/getPageProductCategory/"+id);
   }
 
-  
+  readListProduct(): Observable<any> {
+    return this.httpClient.get(baseURL + '/'+ 'getAll');
+  }
 
+ 
  
 }

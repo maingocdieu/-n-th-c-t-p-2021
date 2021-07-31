@@ -1,0 +1,18 @@
+<ng-container *ngIf="isDisplaying" >
+  <div class="modal__overlay" (click)="close()"></div>
+  <div class="modal__container">
+
+    <div class="modal__body">
+      <div class="modal__body--content">
+        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+        <p>You dont choose any thing</p>
+      </div>
+
+    </div>
+
+    <div class="modal__footer">
+      <button class="modal__footer-button" (click)="close()">OK</button>
+    </div>
+  </div>
+</ng-container>
+

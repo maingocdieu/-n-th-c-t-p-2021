@@ -1,0 +1,18 @@
+.category__addbutton{
+  width: 100%;
+  
+  }
+  .icon__close{
+  position: relative;
+  top: -20px;
+  right: -421px;
+  background-color: white;
+  color: black !important;
+  }
+  
+  .icon__close:hover {
+    background-color: red;
+  }
+  
+  
+  

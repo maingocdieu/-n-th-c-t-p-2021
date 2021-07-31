@@ -12,19 +12,33 @@ import { HttpClientModule } from '@angular/common/http';
 import { CanActivateRouteGuard } from './can-activate-route.guard';
 import { AdminModule } from './admin-page/admin.module';
 import { UserModule } from './user-page/user.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSliderModule } from '@angular/material/slider';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { SelectRequiredValidatorDirective } from './validators/select.required.directive';
+import { CommonModule } from '@angular/common';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
+    SelectRequiredValidatorDirective,
+    
   ],
   imports: [
+    MatSliderModule,
+    MatDatepickerModule,
+    CommonModule,
     FormsModule,
     HttpClientModule,
     BrowserModule,
     UserModule,
     AdminModule,
-    AppRoutingModule
+    AppRoutingModule,
+   
+    BrowserAnimationsModule
   ],
   providers: [CanActivateRouteGuard],
   bootstrap: [AppComponent]

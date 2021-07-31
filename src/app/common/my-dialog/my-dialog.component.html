@@ -1,0 +1,19 @@
+<ng-container *ngIf="isDisplaying">
+  <div class="modal__overlay" (click)="close()"></div>
+  <div class="modal__container">
+    <div class="modal__header">
+          <h3 class="modal__header--txt">Confirm</h3>
+    </div>
+    <div class="modal__body">
+
+        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+        Do you want to delete ?
+    </div>
+    <div class="modal__footer">
+      <div class="modal__footer-btn">
+       <button class="custombtn custombtn--yes" (click)="close()">No</button>
+       <button class="custombtn custombtn--cancel" (click)="onYesBtnClicked()">Yes</button>
+      </div>
+    </div>
+  </div>
+</ng-container>

@@ -92,7 +92,6 @@ export class CartService {
     // if found, remove the item from the array at the given index
     if (itemIndex > -1) {
       this.cartItems.splice(itemIndex, 1);
-
       this.computeCartTotals();
     }
   }

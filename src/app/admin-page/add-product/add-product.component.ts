@@ -25,7 +25,7 @@ export class AddProductComponent implements OnInit {
   product = {
     id: -1,
     nameProduct: '',
-    price: '',
+    giaBanRa: '',
     base64: '',
     nameImage: '',
     categoryCode: '',
@@ -189,7 +189,7 @@ export class AddProductComponent implements OnInit {
           this.product.base64.toString();
           this.product.nameProduct = this.productForm.get('productName').value;
           this.product.categoryCode = this.productForm.get('category').value;
-          this.product.price = this.productForm.get('price').value;
+          this.product.giaBanRa = this.productForm.get('price').value;
           this.productService.insertProduct(this.product).subscribe(() => {});
           this.router.navigateByUrl('/admin');
         });
@@ -202,7 +202,7 @@ export class AddProductComponent implements OnInit {
         if (this.selectedFile == undefined) {
           this.product.base64 = null;
           this.product.nameProduct = this.productForm.get('productName').value;
-          this.product.price = this.productForm.get('price').value;
+          this.product.giaBanRa = this.productForm.get('price').value;
           this.product.categoryCode = this.productForm.get('category').value;
           this.product.describe = this.productForm.get('describe').value;
           this.productService
@@ -221,7 +221,7 @@ export class AddProductComponent implements OnInit {
               'productName'
             ).value;
             this.product.categoryCode = this.productForm.get('category').value;
-            this.product.price = this.productForm.get('price').value;
+            this.product.giaBanRa = this.productForm.get('price').value;
             this.productService
               .updateProduct(this.isCreateOrUpdate, this.product)
               .subscribe(() => {
