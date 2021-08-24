@@ -1,4 +1,6 @@
 .customImg {
-  width: 100%;
-  height: 400px !important;
+  max-height: 350px !important;
+  max-width: 100%;
 }
+
+

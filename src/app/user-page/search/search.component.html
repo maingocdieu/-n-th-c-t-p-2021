@@ -1,0 +1,7 @@
+<div class="search">
+  <input type="text" placeholder="Search" #myInput type="text" 
+  placeholder="Nhập từ khóa tìm kiếm"
+  class="au-input au-input-xl"
+  (keyup.enter)="doSearch(myInput.value)">
+  <button (click)="doSearch(myInput.value)"><i class="fa fa-search"></i></button>
+</div>

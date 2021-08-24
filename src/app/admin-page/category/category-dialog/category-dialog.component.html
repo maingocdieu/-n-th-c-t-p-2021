@@ -1,5 +1,5 @@
 <div class="div">
-  <mat-icon id="close-icon" class="icon__close" style="color: red" (click)="closeDialog()">close</mat-icon>
+ 
   <form [formGroup]="categoryForm">
     <div class="row mb-3">
 
@@ -11,7 +11,7 @@
         <label style="color: red;" *ngIf="f.nameCategory.errors?.required && f.nameCategory.touched" class="error">
           Tên loại sản phẩm phải bắt buộc
         </label>
-        <label style="color: red;" *ngIf="f.nameCategory.errors?.courseExist" class="error">
+        <label style="color: red;" *ngIf="f.nameCategory.errors?.courseExist && data.data==null" class="error">
           Loại sản phẩm đã tồn tại
         </label>
       </div>

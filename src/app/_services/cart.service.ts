@@ -2,6 +2,13 @@ import { Injectable } from '@angular/core';
 import { CartItem } from '../model/cart-item';
 import { Subject } from 'rxjs';
 
+export interface ICartInfor {
+  id: number;
+  name: string;
+  quantity: number
+  giaBanRa: number;
+  imageUrl: string;
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -11,8 +18,18 @@ export class CartService {
 
   totalPrice: Subject<number> = new Subject<number>();
   totalQuantity: Subject<number> = new Subject<number>();
-
+  CartInfo: Subject<ICartInfor[]> = new Subject<ICartInfor[]>();
   constructor() { }
+
+  getTotal() {
+    let temp = { totalPrice: 0, totalQuantity: 0 };
+    for (let i = 0; i < this.cartItems.length; i++) {
+      const elm = this.cartItems[i];
+      temp.totalPrice += elm.giaBanRa;
+      temp.totalQuantity += elm.quantity;
+    }
+    return temp;
+  }
 
   addToCart(theCartItem: CartItem) {
 
@@ -23,7 +40,7 @@ export class CartService {
     if (this.cartItems.length > 0) {
       // find the item in the cart based on item id
 
-      existingCartItem = this.cartItems.find( tempCartItem => tempCartItem.id === theCartItem.id );
+      existingCartItem = this.cartItems.find(tempCartItem => tempCartItem.id === theCartItem.id);
 
       // check if we found it
       alreadyExistsInCart = (existingCartItem != undefined);
@@ -48,14 +65,17 @@ export class CartService {
     let totalQuantityValue: number = 0;
 
     for (let currentCartItem of this.cartItems) {
-      totalPriceValue += currentCartItem.quantity * currentCartItem.price;
+      totalPriceValue += currentCartItem.quantity * currentCartItem.giaBanRa;
       totalQuantityValue += currentCartItem.quantity;
     }
 
     // publish the new values ... all subscribers will receive the new data
     this.totalPrice.next(totalPriceValue);
     this.totalQuantity.next(totalQuantityValue);
-
+    // this.CartInfo.next({
+    //   totalQuantity: totalQuantityValue,
+    //   totalPrice: totalPriceValue
+    // });
     // log cart data just for debugging purposes
     this.logCartData(totalPriceValue, totalQuantityValue);
   }
@@ -64,8 +84,8 @@ export class CartService {
 
     console.log('Contents of the cart');
     for (let tempCartItem of this.cartItems) {
-      const subTotalPrice = tempCartItem.quantity * tempCartItem.price;
-      console.log(`name: ${tempCartItem.name}, quantity=${tempCartItem.quantity}, unitPrice=${tempCartItem.price}, subTotalPrice=${subTotalPrice}`);
+      const subTotalPrice = tempCartItem.quantity * tempCartItem.giaBanRa;
+      console.log(`name: ${tempCartItem.name}, quantity=${tempCartItem.quantity}, unitPrice=${tempCartItem.giaBanRa}, subTotalPrice=${subTotalPrice}`);
     }
 
     console.log(`totalPrice: ${totalPriceValue.toFixed(2)}, totalQuantity: ${totalQuantityValue}`);
@@ -85,11 +105,7 @@ export class CartService {
   }
 
   remove(theCartItem: CartItem) {
-
-    // get index of item in the array
-    const itemIndex = this.cartItems.findIndex( tempCartItem => tempCartItem.id === theCartItem.id );
-
-    // if found, remove the item from the array at the given index
+    const itemIndex = this.cartItems.findIndex(tempCartItem => tempCartItem.id === theCartItem.id);
     if (itemIndex > -1) {
       this.cartItems.splice(itemIndex, 1);
       this.computeCartTotals();

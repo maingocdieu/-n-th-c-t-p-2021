@@ -1,4 +1,4 @@
-<div class="container-fluid" style="width: 158%;">
+<div class="container-fluid" style="width: 140%;">
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
       <a href="#">Dashboard</a>
@@ -71,14 +71,12 @@
                 </td>
                 <td> <input type="text" class="form-control " id="quantity"  formControlName="amount"
                     placeholder="Example input">
-
                   <label style="color: red;"
                     *ngIf="employees.controls[i].get('amount').errors?.required && isValidFormSubmitted != null && !isValidFormSubmitted"
                     class="error">
                     Số lượng không được bỏ trống
                   </label>
                 </td>
-
                 <td>{{employees.controls[i].get('price').value * employees.controls[i].get('amount').value }}</td>
                 <td><button type="button" class="btn btn-danger" (click)="deletePhieuNhap(i)">Delete</button></td>
               </tr>
@@ -91,9 +89,6 @@
       <button type="button" class="btn btn-success" style="margin-left: 50px;" (click)="addEmployee()">Thêm phiếu nhập</button>
     </form>
     <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-
     <div *ngIf = "messageSucess">Thêm thành công</div>
   </div>
-
-
 </div>

@@ -17,25 +17,26 @@
         Data Table Example</div>
       <div class="card-body">
         <div class="table-responsive">
-          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" *ngIf = "listProduct">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
+                <th>Tên sản phẩm</th>
+                <th>Ảnh sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Giá sản phẩm</th>
+                <th>Ngày tạo sản phẩm</th>
+                <th>Hành đông</th>>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of products">
+              <tr *ngFor="let item of listProduct">
                 <th>{{item.nameProduct}}</th>
-                <th><img src="http://localhost:8080/uploads/{{item.nameImage}}" alt=""></th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
+                <th><img src="http://localhost:8080/uploads/{{item.nameImage}}" style="width: 50px; height: 100%;" alt=""></th>
+                <th>{{item.soLuong}}</th>
+                <th>{{item.giaBanRa}}</th>
+                <th>{{item.createdDate}}</th>
+                <th><i class="far fa-edit" style="color: darkgreen; font-size:x-large;"  [routerLink]="['product/edit',item.id]"></i>
+                  <i class="fas fa-backspace" style="color: darkgreen; font-size:x-large;margin-left: 40px;" (click) = "showConfirmDialog(item.id)"></i></th>
               </tr>
             </tbody>
           </table>
@@ -44,20 +45,20 @@
    
     </div>
 
-    <p class="small text-center text-muted my-5">
-      <em>More table examples coming soon...</em>
-    </p>
+    <ul class="pagination justify-content-lg-end" style="margin-right: 15px;
+    margin-bottom: 20px;">
+      <li class="page-item"><a  class="page-link" (click) ="previousClick()">Previous</a></li>
+      <li *ngFor='let index of pageIndexes' class="page-item" [ngClass]="active(index)" >
+              <a  class="page-link" (click)="getPaginationWithIndex(index)">
+                {{index + 1}}
+              </a>
+      </li>
+      <li class="page-item"><a  class="page-link" (click)= "nextClick()">Next</a></li>
+    </ul>
 
   </div>
-  <!-- /.container-fluid -->
-
-  <!-- Sticky Footer -->
-  <footer class="sticky-footer">
-    <div class="container my-auto">
-      <div class="copyright text-center my-auto">
-        <span>Copyright © Your Website 2019</span>
-      </div>
-    </div>
-  </footer>
 
 </div>
+<app-alert #alertDeleteDialog [item]="currentItem" ></app-alert>
+
+<app-dialog #confirmDeleteDialog (yesClicked)="checkXoa()"></app-dialog>

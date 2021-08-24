@@ -17,8 +17,7 @@
       <span>Loại sản phẩm</span>
     </a>
     <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-      <a class="dropdown-item" [routerLink] = "['/admin/phieuNhap']" >DS Loại Sản Phẩm</a>
-      <a class="dropdown-item" [routerLink] = "['/admin/addCategory']">Thêm loại sản phẩm</a>
+      <a class="dropdown-item" [routerLink] = "['/admin/addCategory']">Loại sản phẩm</a>
     </div>
   </li>
   <li class="nav-item dropdown">
@@ -28,7 +27,7 @@
     </a>
     <div class="dropdown-menu" aria-labelledby="pagesDropdown">
       <a class="dropdown-item" [routerLink] = "['/admin/addProduct']" >Thêm sản phẩm</a>
-      <a class="dropdown-item" href="register.html">Danh Sách Sản Phẩm</a>
+      <a class="dropdown-item" [routerLink] = "['/admin']">Danh Sách Sản Phẩm</a>
     </div>
   </li>
 
@@ -38,8 +37,19 @@
       <span>Phiếu nhập</span>
     </a>
     <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-      <a class="dropdown-item" [routerLink] = "['/admin/phieuNhap']" >Danh Sách Phiếu nhập</a>
-      <a class="dropdown-item" href="register.html">Lập phiếu nhập</a>
+      <a class="dropdown-item" [routerLink] = "['/admin/getphieunhap']"  >Danh Sách Phiếu nhập</a>
+      <a class="dropdown-item" [routerLink] = "['/admin/phieuNhap']"  >Lập phiếu nhập</a>
+    </div>
+  </li>
+
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="fas fa-fw fa-folder"></i>
+      <span>Đơn đặt hàng</span>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+      <a class="dropdown-item" [routerLink] = "['admin/order']" >Danh sách đơn hàng</a>
+      
     </div>
   </li>
 
@@ -49,8 +59,7 @@
       <span>Thông tin user</span>
     </a>
     <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-      <a class="dropdown-item" [routerLink] = "['/admin/phieuNhap']" >Danh sách user</a>
-      <a class="dropdown-item" href="register.html">Thêm user</a>
+      <a class="dropdown-item" [routerLink] = "['/admin/user']" >Danh sách user</a>
     </div>
 
     <div class="dropdown-menu" aria-labelledby="pagesDropdown">

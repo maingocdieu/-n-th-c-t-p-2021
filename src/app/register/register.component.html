@@ -1,39 +1,53 @@
+<div class="main">
 
-<div class="container-fluid">
-  <div class="row justify-content-center" >
-      <div class="col-lg-9 ">    
-          <div class="register-form ">
-              <div class="row  ">
-                  <div class="col-md-6">
-                      <label>First Name</label>
-                      <input class="form-control" type="text" placeholder="First Name">
-                  </div>
-                  <div class="col-md-6">
-                      <label>Last Name"</label>
-                      <input class="form-control" type="text" placeholder="Last Name">
-                  </div>
-                  <div class="col-md-6">
-                      <label>E-mail</label>
-                      <input class="form-control" type="text" placeholder="E-mail">
-                  </div>
-                  <div class="col-md-6">
-                      <label>Mobile No</label>
-                      <input class="form-control" type="text" placeholder="Mobile No">
-                  </div>
-                  <div class="col-md-6">
-                      <label>Password</label>
-                      <input class="form-control" type="text" placeholder="Password">
-                  </div>
-                  <div class="col-md-6">
-                      <label>Retype Password</label>
-                      <input class="form-control" type="text" placeholder="Password">
-                  </div>
-                  <div class="col-md-12">
-                      <button class="btn">Submit</button>
-                  </div>
-              </div>
-          </div>
+  <form action="" method="POST" class="form" id="form-1" [formGroup]="userForm">
+    <h3 class="heading">Đăng ký tài khoản</h3>
+    <div class="spacer"></div>
+    <div class="form-group">
+      <label for="fullname" class="form-label">Tên đăng nhập</label>
+      <input id="fullname" name="fullname" type="text" placeholder="VD: Sơn Đặng" class="form-control"
+        formControlName="userName" (blur)="logKeyValuePairs()">
+      <span *ngIf="formErrors.userName" class="form-message" style="color: red">
+        {{ formErrors.userName }}</span>
+    </div>
+
+    <div class="form-group">
+      <label for="email" class="form-label">Email</label>
+      <input id="email" name="email" type="text" placeholder="VD: email@domain.com" class="form-control"
+        formControlName="email" (blur)="logKeyValuePairs()">
+      <span *ngIf="formErrors.email" class="form-message" style="color: red;"> 
+        {{ formErrors.email }}</span>
+    </div>
+
+
+    <div formGroupName="passwordGroup">
+      <div class="form-group" >
+        <label for="password" class="form-label">Mật khẩu</label>
+        <input id="password" name="password" type="password" placeholder="Nhập mật khẩu" class="form-control"
+          formControlName="passWord" (blur)="logKeyValuePairs()">
+        <span style="color: red;" *ngIf="formErrors.passWord" class="form-message">
+          {{ formErrors.passWord }}</span>
       </div>
-      
-  </div>
+
+      <div class="form-group">
+        <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
+        <input id="password_confirmation" name="password_confirmation" placeholder="Nhập lại mật khẩu" type="password"
+          class="form-control" formControlName="confirmPassword" (blur)="logKeyValuePairs()">
+        <span style="text-align: left; color: red;" *ngIf="formErrors.confirmPassword || formErrors.passwordGroup">
+          <span  class="form-message">{{ formErrors.confirmPassword }}
+            {{ formErrors.passwordGroup }}
+          </span>
+        </span>
+      </div>
+    </div>
+    <button class="form-submit" (click)="onSubmit()">Đăng ký</button>
+
+    <span style="text-align: left; color: red"  class="form-message" *ngIf ="isSignUpFailed">
+      {{ this.errorMessage}}
+    </span>
+
+    <div class="alert alert-success" *ngIf="isSuccessful">
+     Bạn đã đăng kí tài khoản thành công
+    </div>
+  </form>
 </div>

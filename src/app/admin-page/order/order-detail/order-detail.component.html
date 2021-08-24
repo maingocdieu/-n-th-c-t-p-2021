@@ -1,0 +1,44 @@
+<div id="content-wrapper" >
+
+  <div class="container-fluid">
+
+    
+    <!-- DataTables Example -->
+    <div class="card mb-3">
+      <div class="card-header">
+        <i class="fas fa-table"></i>
+       Chi tiết đơn đặt hàng</div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Mã đơn đặt hàng</th>
+                <th>Hình ảnh sản phẩm</th>
+                <th>Tên sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Giá</th>
+                <th>Chi tiết giá</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor = "let item of data.data.listOderDetail">
+                <th>{{data.data.id}}</th>
+                <th><img src="http://localhost:8080/uploads/{{item.product.nameImage}}" style="width: 50px; height: 100%;" alt=""></th>
+                <th>{{item.product.nameProduct}}</th>
+                <th>{{item.quantity}}</th>
+                <th>{{item.product.giaBanRa}}</th>
+                <th>{{item.quantity * item.product.giaBanRa}}</th> 
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+   
+    </div>
+
+  </div>
+
+
+  
+</div>

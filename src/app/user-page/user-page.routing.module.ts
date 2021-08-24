@@ -8,6 +8,10 @@ import { HomeComponent } from './home/home.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { CardStatusComponent } from './card-status/card-status.component';
 import { CartComponent } from './cart/cart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { ProductSearchComponent } from './product-search/product-search.component';
+import { UpdatePNComponent } from '../admin-page/phieunhap/update-pn/update-pn.component';
+import { UpdateAcountComponent } from './update-acount/update-acount.component';
 
 
 
@@ -37,6 +41,17 @@ const UserRoutes: Routes = [
       {
         path:'product',
         component: ProductListComponent
+      },
+      {
+        path: 'checkout',
+        component: CheckoutComponent
+      },
+      {
+        path: 'search/:keyword', component: ProductSearchComponent
+      }
+      ,{
+        path: "update_acount",
+        component: UpdateAcountComponent
       }
     ]
   },

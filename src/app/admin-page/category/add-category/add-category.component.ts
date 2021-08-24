@@ -22,6 +22,8 @@ export class AddCategoryComponent implements OnInit {
   buttonName='cap nhat';
   masterSelected=false;
   selectedItemsList: number[] = [];
+  currentItem = " ";
+  id : any;
   constructor(public dialog: MatDialog,public categoryService: CategoryService) {}
   ngOnInit(): void {
     this.readCategory();
@@ -54,7 +56,6 @@ export class AddCategoryComponent implements OnInit {
 
 
   addandUpdateCategory(category):void{
-    
     this.openDialogCategory(category).afterClosed().subscribe((res)=>{
       if(res!=undefined)
       {
@@ -93,20 +94,7 @@ export class AddCategoryComponent implements OnInit {
         this.selectedItemsList.push(this.categorys[i].id);
     }
   }
-
-  deleteCategory(): void {
-    this.categoryService.deleteById(this.selectedItemsList).subscribe(
-      () => {
-        this.selectedItemsList.splice(0, this.selectedItemsList.length);
-        this.readCategory();
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-    this.confirmDeleteDialog.close();
-  }
-
+  
   showConfirmDeleteDialog() {
     if (this.selectedItemsList.length == 0) {
       this.alertDeleteDialog.show();
@@ -115,9 +103,24 @@ export class AddCategoryComponent implements OnInit {
     }
   }
 
-
   closeConfirmDeleteDialog() {
     this.confirmDeleteDialog.close();
   }
 
+  XoaDanhMuc(id) {
+    this.confirmDeleteDialog.show();
+    this.id = id;
+  }
+
+  deleteCategory(): void {
+    this.categoryService.deleteCateGory(this.id).subscribe(res => {
+      if(res == true) {
+          this.readCategory();
+      } else {
+        this.currentItem = "Bạn không thể xóa"
+        this.alertDeleteDialog.show();
+      }
+    })
+    this.confirmDeleteDialog.close();
+  }
 }

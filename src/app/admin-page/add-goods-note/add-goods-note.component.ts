@@ -12,6 +12,7 @@ import { TokenStorageService } from 'src/app/_services/token-storage.service';
 })
 export class AddGoodsNoteComponent implements OnInit {
 
+  chitietphieunhap = false;
   phieuNhap = {
     listPhieuNhap: [],
     userId: '',
@@ -52,9 +53,8 @@ export class AddGoodsNoteComponent implements OnInit {
   createEmpFormGroup() {
     return this.formBuilder.group({
       amount: ['', [Validators.required]],
-      price: ['', [Validators.required, Validators.min(21)]],
+      price: ['', [Validators.required, Validators.min(0)]],
       productId: ['-1', [electionValidate],
-
       ]
     })
   }
@@ -80,11 +80,15 @@ export class AddGoodsNoteComponent implements OnInit {
   }
 
   deletePhieuNhap(idx: number) {
-    this.employees.removeAt(idx);
+    if(this.employees.length >1) {
+      this.employees.removeAt(idx);
+    }
+  
   }
-
+  addPhieuNhap() {
+    this.chitietphieunhap =true;
+  }
   onFormSubmit() {
-    console.log('dada');
     this.isValidFormSubmitted = false;
     if (this.teamForm.invalid) {
       return;
@@ -92,9 +96,8 @@ export class AddGoodsNoteComponent implements OnInit {
     this.isValidFormSubmitted = true;
     this.phieuNhap.listPhieuNhap = this.teamForm.value.employees;
     this.phieuNhap.userId = this.tokenStorage.getUser().id;
-    let month = this.teamForm.value.ngayTao.getDate();
-    let date = this.teamForm.value.ngayTao.getMonth() + 1;
-    console.log(date);
+    let date = this.teamForm.value.ngayTao.getDate();
+    let month = this.teamForm.value.ngayTao.getMonth() + 1;
     if (month < 10) {
       month = '0' + (this.teamForm.value.ngayTao.getMonth() + 1);
     }
@@ -107,8 +110,12 @@ export class AddGoodsNoteComponent implements OnInit {
         this.messageSucess = true;
         this.teamForm.reset();
       }
+    },
+    (error) => {
+      alert("Có sản phẩm giống nhau trên giỏ hàng");
+      return;
     });
-  }
+   }
 }
 
 function electionValidate(control: AbstractControl): { [key: string]: any } | null {

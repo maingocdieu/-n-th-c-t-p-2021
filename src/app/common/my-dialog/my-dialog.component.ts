@@ -8,6 +8,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class MyDialogComponent implements OnInit {
 
   @Output() yesClicked = new EventEmitter()
+  
 
   isDisplaying = false;
 

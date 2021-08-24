@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {  Router } from '@angular/router';
+import { CustomalertComponent } from 'src/app/common/customalert/customalert.component';
 import { CartItem } from 'src/app/model/cart-item';
 import { CartService } from 'src/app/_services/cart.service';
 import { CategoryService } from 'src/app/_services/category.service';
@@ -24,7 +25,9 @@ export class HomeComponent implements OnInit {
   totalPages: number = 0;
   pageIndexes: Array<number> = [];
 
-  
+  @ViewChild('alertDeleteDialog', { static: false })
+  alertDeleteDialog: CustomalertComponent;
+  currentItem = 'Sản phẩm thạm thời hết hàng';
   constructor(
     public productService: ProductService,
     public categoryService: CategoryService,
@@ -37,11 +40,6 @@ export class HomeComponent implements OnInit {
     
   }
 
-  // getCategorys() {
-  //  this.categoryService.readAllCategory().subscribe((res) => {
-  //       this.categorys = res;
-  //  })
-  // }
 
   getPaginationWithIndex(index) {
     this.product.page = index;
@@ -103,12 +101,11 @@ export class HomeComponent implements OnInit {
   }
 
   addToCart(theProduct: any) {
-    
-    console.log(`Adding to cart: ${theProduct.name}, ${theProduct.unitPrice}`);
-
-    // TODO ... do the real work
     const theCartItem = new CartItem(theProduct);
-
+    if(theCartItem.quantity >theCartItem.soLuongTon) {
+        this.alertDeleteDialog.show();
+        return;
+    }
     this.cartService.addToCart(theCartItem);
   }
 

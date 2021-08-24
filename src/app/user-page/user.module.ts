@@ -13,6 +13,10 @@ import { HomeComponent } from './home/home.component';
 import { CategoryComponent } from './category/category.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { CardStatusComponent } from './card-status/card-status.component';
+import { CustomalertComponent } from '../common/customalert/customalert.component';
+import { SearchComponent } from './search/search.component';
+import { ProductSearchComponent } from './product-search/product-search.component';
+import { UpdateAcountComponent } from './update-acount/update-acount.component';
 
 
 
@@ -27,8 +31,11 @@ import { CardStatusComponent } from './card-status/card-status.component';
     CategoryComponent,
     CardStatusComponent,
     HomeComponent,
-  
-    UserPageComponent    
+    CustomalertComponent,
+    UserPageComponent ,
+    SearchComponent,   
+    ProductSearchComponent,
+    UpdateAcountComponent,
   ],
   imports: [
     CommonModule,

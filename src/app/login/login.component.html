@@ -58,9 +58,9 @@
          class="form-control" name="password" [(ngModel)]="form.password" required minlength="6"
         #password="ngModel">
         <div style="margin-left: 0; text-align: left; color: red;" *ngIf="f.submitted && password.invalid">
-          <span class="form-message" *ngIf="password.errors.required">Password is required</span>
+          <span class="form-message" *ngIf="password.errors.required">Mật khẩu bắt buộc</span>
           <span class="form-message" *ngIf="password.errors.minlength">
-            Password must be at least 6 characters
+           Mật khẩu ít nhất 6 kí tự
           </span>
         </div>
     </div>

@@ -30,6 +30,19 @@ export class CategoryService {
       })
     );
   }
+  deleteCateGory(data):Observable<any> {
 
+   let id = {
+      "id": data
+    }
+    console.log( JSON.stringify(id));
+    return this.httpClient.post(baseURL + '/deleteCategory' ,data,
+    {
+      headers: {
+        "Content-Type": "application/json; charset=utf-8"
+      }}
+    
+    );
+  }
 
 }

@@ -1,0 +1,83 @@
+<div id="content-wrapper" style="width: 115%;">
+
+  <div class="container-fluid">
+
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="#">Dashboard</a>
+      </li>
+      <li class="breadcrumb-item active">OderList</li>
+    </ol>
+
+    <!-- DataTables Example -->
+    <div class="card mb-3">
+      <div class="card-header">
+        <i class="fas fa-table"></i>
+       Danh sách đơn đặt hàng</div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Mã</th>
+                <th>Họ tên khách hàng</th>
+                <th>Số điện thoại khách hàng</th>
+                <th>Dia chi</th>
+                <th>Ngày tạo đơn hàng </th>
+                <th>Tổng giá</th>
+                <th>Trạng thái đơn hàng</th>
+                <th>Hành đông</th>
+                <th>Duyệt đơn hàng</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of listOrder">
+                <th>{{item.id}}</th>
+                <th>{{item.createdBy}}</th>
+                <th>{{item.sdt}}</th>
+                <th>{{item.diaChi}}</th>
+                <th>{{item.createdDate|  date:'short'}}</th>
+                <th>{{item.totalPrice}}</th>
+                <th>
+                  <span *ngIf = "item.status else elseBlock">
+                      Đang giao
+                  </span>
+                  <ng-template #elseBlock>
+                      Chưa giao
+                  </ng-template>
+                </th>
+                <th><i class="far fa-edit" style="color: darkgreen; font-size:x-large;" (click) ="openDialogCategory(item)" ></i>
+                  <i class="fas fa-backspace" style="color: darkgreen; font-size:x-large;margin-left: 40px;" (click) = "deleteOrderList(item)" ></i></th>
+                  <th><button *ngIf = "item.status else else1Block" type="button" class="btn btn-primary" style="width: 150px;" (click)= "updateStatus(item.id,item.status)">Dã duyệt</button>
+                    <ng-template #else1Block>
+                      <button type="button" class="btn btn-danger" style="width: 150px;" (click)= "updateStatus(item.id,item.status)">Chưa duyệt</button>
+                    </ng-template>
+                  </th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+   
+    </div>
+
+  
+
+  </div>
+  <!-- /.container-fluid -->
+
+  <!-- Sticky Footer -->
+  <footer class="sticky-footer">
+    <div class="container my-auto">
+      <div class="copyright text-center my-auto">
+        <span>Copyright © Your Website 2019</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+
+<app-alert #alertDeleteDialog [item]="currentItem" ></app-alert>
+<!-- <app-alert #alertDeleteDialog [item]="currentItem" ></app-alert> -->

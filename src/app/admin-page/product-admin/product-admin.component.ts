@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { AlertComponent } from 'src/app/common/alert/alert.component';
+import { MyDialogComponent } from 'src/app/common/my-dialog/my-dialog.component';
 import { ProductService } from 'src/app/_services/product.service';
+import { AddProductComponent } from '../product/add-product/add-product.component';
 
 @Component({
   selector: 'app-product-admin',
@@ -8,17 +12,144 @@ import { ProductService } from 'src/app/_services/product.service';
 })
 export class ProductAdminComponent implements OnInit {
 
-  constructor(private productService: ProductService) {
-    
-   }
+
+  @ViewChild('confirmDeleteDialog', { static: false })
+  confirmDeleteDialog: MyDialogComponent;
+  @ViewChild('alertDeleteDialog', { static: false })
+  alertDeleteDialog: AlertComponent;
+  currentItem = ' Bạn không được phép xóa';
+  constructor(private productService: ProductService, public dialog: MatDialog) {
+
+  }
 
   products: any;
 
-  ngOnInit(): void {
-   
-    this.productService.readListProduct().subscribe((res) => {
-      this.products =res;
-     })
+  product = {
+    nameProduct: '',
+    categoryId: null,
+    price : null,
+    pageSize: 0,
+    page: 0,
   }
+  listProduct: any;
+  currentSelectedPage: number = 0;
+  valueRole = '-1';
+  totalPages: number = 0;
+  pageIndexes: Array<number> = [];
+
+  id: number;
+
+  ngOnInit(): void {
+    this.getPage();
+    
+  }
+
+
+  readProduct() {
+    this.productService.readListProduct().subscribe((res) => {
+      this.products = res;
+    })
+  }
+
+ 
+
+
+  openDialogCategory() {
+    return this.dialog.open(AddProductComponent, {
+      width: '100%',
+      panelClass: 'custom-modalbox',
+      autoFocus: false,
+      data: {
+        data: this.products,
+      },
+    });
+  }
+
+
+  getPaginationWithIndex(index) {
+    this.product.page = index;
+    this.productService.getProductPagingList(this.product).subscribe((res) => {
+      if (res === null) {
+        this.listProduct = null;
+      } else {
+        this.listProduct = res.content;
+        this.totalPages = res.totalPages;44
+
+        console.log(Array(this.totalPages).fill(0).map((x, i) => i));
+        this.pageIndexes = Array(this.totalPages)
+          .fill(0)
+          .map((x, i) => i);
+        this.currentSelectedPage = res.pageable.pageNumber;
+      }
+    });
+  }
+
+  active(index: number) {
+    if (this.currentSelectedPage == index) {
+      return {
+        active: true,
+      };
+    } else {
+      return { active: false };
+    }
+  }
+
+  nextClick() {
+    if (this.currentSelectedPage < this.totalPages - 1) {
+      this.product.page = this.product.page + 1;
+      this.getPage();
+    }
+  }
+
+  previousClick() {
+    if (this.currentSelectedPage > 0) {
+      this.product.page = this.product.page - 1;
+      this.getPage();
+    }
+  }
+  getPage() {
+   
+    this.productService.getProductPagingList(this.product).subscribe((res) => {
+      if (res === null) {
+        this.listProduct = null;
+      } else {
+        this.listProduct = res.content;
+        this.totalPages = res.totalPages;
+        this.pageIndexes = Array(this.totalPages)
+          .fill(0)
+          .map((x, i) => i);
+        this.currentSelectedPage = res.pageable.pageNumber;
+      }
+    });
+  }
+
+
+  showConfirmDialog(id) {
+    this.confirmDeleteDialog.show();
+    this.id = id;
+  }
+
+
+  async checkXoa() {
+    this.productService.checkIdProduct(this.id).subscribe(value => {
+      if (value > 0) {
+        this.currentItem = "Bạn không thể xóa";
+        this.confirmDeleteDialog.close();
+        this.alertDeleteDialog.show();
+        return;
+      }
+    })
+    let listid = [];
+    listid.push(this.id);
+    await this.productService.deleteById(listid).toPromise();
+    this.getPage();
+    this.alertDeleteDialog.show();
+    this.currentItem = "Xoa thanh công";
+    this.confirmDeleteDialog.close();
+  }
+
+  
+    
+  
 
 }

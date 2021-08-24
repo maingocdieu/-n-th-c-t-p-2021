@@ -19,7 +19,6 @@ export class CategoryDialogComponent implements OnInit {
   };
   buttonName = '';
   categoryForm: FormGroup;
-
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
   public dialogRef: MatDialogRef<CategoryDialogComponent>, private formBuilder: FormBuilder,public categoryService: CategoryService) {
 
@@ -35,14 +34,24 @@ export class CategoryDialogComponent implements OnInit {
   }
 }
   ngOnInit(): void {
-    this.categoryForm = this.formBuilder.group({
-      nameCategory: ['',{validators : [Validators.required],
-        asyncValidators: [this.customAsyncValidator()],
-        updateOn: 'blur'
+    if(this.data.data == null) {
+      this.categoryForm = this.formBuilder.group({
+        nameCategory: ['',{validators : [Validators.required],
+         asyncValidators: [this.customAsyncValidator()],
+         updateOn: 'blur'
 
-      }],
-      codeCategory: ['',Validators.required]
-    });
+     }],
+     codeCategory: ['',Validators.required]
+   });
+    } else {
+      this.categoryForm = this.formBuilder.group({
+        nameCategory: ['',{validators : [Validators.required],
+         updateOn: 'blur'
+
+     }],
+     codeCategory: ['',Validators.required]
+   });
+    }
   }
 
   get f() { return this.categoryForm.controls; }
@@ -54,10 +63,10 @@ export class CategoryDialogComponent implements OnInit {
   customAsyncValidator(): AsyncValidatorFn {
      return (control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> =>{
        return this.categoryService.readAllCategory().pipe(map(res => {
+         console.log(this.f.nameCategory.value);
         const name = res.find(res => res.name.toLowerCase() === this.f.nameCategory.value.toLowerCase());
         return name? {courseExist: true}: null;
        })
-
        );
      }
   }

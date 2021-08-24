@@ -87,12 +87,12 @@ export class AddProductComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.isCreateOrUpdate != null) {
-      console.log("create");
       this.productForm = this.fb.group({
         productName: ['', [Validators.required]],
         category: ['', [Validators.required]],
         price: ['', [Validators.required]],
         describe: ['', [Validators.required]],
+    
 
       });
       this.productForm.valueChanges.subscribe(() => {
@@ -118,7 +118,6 @@ export class AddProductComponent implements OnInit {
   readCategory() {
     this.categoryService.readAllCategory().subscribe((res) => {
       this.categorys = res;
-      console.log('category'+ res);
     });
   }
   logKeyValuePairs(group: FormGroup = this.productForm): void {
@@ -190,8 +189,13 @@ export class AddProductComponent implements OnInit {
           this.product.nameProduct = this.productForm.get('productName').value;
           this.product.categoryCode = this.productForm.get('category').value;
           this.product.giaBanRa = this.productForm.get('price').value;
-          this.productService.insertProduct(this.product).subscribe(() => {});
-          this.router.navigateByUrl('/admin');
+          this.product.describe = this.productForm.get('describe').value;
+          this.productService.insertProduct(this.product).subscribe((res) => {
+              if(res) {
+                this.router.navigateByUrl('/admin');
+              }
+          });
+         
         });
       }
     } else {
@@ -208,7 +212,7 @@ export class AddProductComponent implements OnInit {
           this.productService
             .updateProduct(this.isCreateOrUpdate, this.product)
             .subscribe((res) => {
-              this.router.navigateByUrl('/product');
+              this.router.navigateByUrl('/admin');
             });
 
         } else {
@@ -225,7 +229,7 @@ export class AddProductComponent implements OnInit {
             this.productService
               .updateProduct(this.isCreateOrUpdate, this.product)
               .subscribe(() => {
-                this.router.navigateByUrl('/product');
+                this.router.navigateByUrl('/admin');
               });
 
           });
@@ -239,12 +243,13 @@ export class AddProductComponent implements OnInit {
 
   showDetaileProduct(id: Number, form: FormGroup) {
     this.productService.getById(id).subscribe((res) => {
+      console.log(res);
       form.get('productName').setValue(res.nameProduct);
-      form.get('price').setValue(res.price);
+      form.get('price').setValue(res.giaBanRa);
       form.get('describe').setValue(res.describe);
-      form.get('category').setValue(res.email);
+      form.get('category').setValue(res.category);
       for (let category of this.categorys) {
-        if (category.code === res.category.code) {
+        if (category.code === res.category?.code) {
           form.get('category').setValue(category.code);
         }
       }

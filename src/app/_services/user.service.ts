@@ -4,6 +4,10 @@ import { Observable } from 'rxjs';
 
 const API_URL = 'http://localhost:8080/api/test/';
 
+
+
+const userRest = 'http://localhost:8080/api/employees/';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -25,5 +29,19 @@ export class UserService {
 
   getAdminBoard(): Observable<any> {
     return this.http.get(API_URL + 'admin', { responseType: 'text' });
+  }
+
+  getUserById(id): Observable<any> {
+    return this.http.get(userRest + id);
+  }
+
+  updateUser(data): Observable<any> {
+
+    console.log(userRest + data.id);
+    return this.http.put(userRest + data.id,data);
+  }
+
+  getAllUser(data): Observable<any> {
+    return this.http.post(userRest,data);
   }
 }

@@ -1,0 +1,58 @@
+<div id="content-wrapper" style="width: 150%;">
+
+  <div class="container-fluid">
+
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="#">Dashboard</a>
+      </li>
+      <li class="breadcrumb-item active">OderList</li>
+    </ol>
+    <div class="card mb-3">
+      <div class="card-header">
+        <i class="fas fa-table"></i>
+              Danh sách đơn đặt hàng</div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr >
+                <th>Mã số phiếu nhập</th>
+                <th>Ngày tạo phiếu nhập</th>
+                <th>Người tạo phiếu nhập</th>
+                <th>Hành động</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor = " let item of listPhieuNhap">
+                <th>{{item.id}}</th>
+                <th>{{item.dateWrite}}</th>
+                <th>{{item.user.username}}</th>
+                <th>
+                  <i class="fas fa-backspace" style="color: darkgreen; font-size:x-large;margin-left: 40px;" (click)= "xoaPhieuNhap(item)"></i>
+                  <i style="color: darkgreen; font-size:x-large;margin-left: 40px;" (click) ="openDialogDetail(item.id)" class="fas fa-info-circle"></i></th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+   
+    </div>
+
+  
+
+  </div>
+  <!-- /.container-fluid -->
+
+  <!-- Sticky Footer -->
+  <footer class="sticky-footer">
+    <div class="container my-auto">
+      <div class="copyright text-center my-auto">
+        <span>Copyright © Your Website 2019</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<app-alert #alertDeleteDialog [item]="currentItem" ></app-alert>

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { CustomalertComponent } from 'src/app/common/customalert/customalert.component';
 import { CartItem } from 'src/app/model/cart-item';
 import { CartService } from 'src/app/_services/cart.service';
 
@@ -12,22 +14,23 @@ export class CartComponent implements OnInit {
   cartItems: CartItem[] = [];
   totalPrice: number = 0;
   totalQuantity: number = 0;
-  constructor(private cartService: CartService) { }
+
+  @ViewChild('alertDeleteDialog', { static: false })
+  alertDeleteDialog: CustomalertComponent;
+  currentItem = ' Bạn không được phép xóa';
+  constructor(private cartService: CartService, private router : Router) { }
 
   ngOnInit(): void {
     this.listCartDetails();
   }
   listCartDetails() {
-
-    // get a handle to the cart items
     this.cartItems = this.cartService.cartItems;
-
-    // subscribe to the cart totalPrice
+    let temp = this.cartService.getTotal();
+    this.totalPrice = temp.totalPrice;
+    this.totalQuantity = temp.totalQuantity;
     this.cartService.totalPrice.subscribe(
       data => this.totalPrice = data
     );
-
-    // subscribe to the cart totalQuantity
     this.cartService.totalQuantity.subscribe( 
       data => this.totalQuantity = data
     );
@@ -35,16 +38,32 @@ export class CartComponent implements OnInit {
     // compute cart total price and quantity
     this.cartService.computeCartTotals();
   }
+ 
 
   incrementQuantity(theCartItem: CartItem) {
+
+    if(theCartItem.quantity >theCartItem.soLuongTon) {
+      this.currentItem = "Số lượng tồn không đủ";
+      this.alertDeleteDialog.show();
+      return;
+
+    }
     this.cartService.addToCart(theCartItem);
   }
 
   decrementQuantity(theCartItem: CartItem) {
-    this.cartService.decrementQuantity(theCartItem);
+    if(theCartItem.quantity > 0)
+    {
+      this.cartService.decrementQuantity(theCartItem);
+    }
+  
   }
 
   remove(theCartItem: CartItem) {
     this.cartService.remove(theCartItem);
   }
+
+  checkout() {
+    this.router.navigateByUrl("checkout");
+}
 }

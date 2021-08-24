@@ -34,12 +34,9 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
        if(this.roles[0] === "ROLE_USER") {
-          this.router.navigateByUrl("home");
-          window.location.replace("home");
+          this.router.navigateByUrl("");
         } else if (this.roles[0] === "ROLE_ADMIN") {
           this.router.navigateByUrl("admin");
-         // window.location.replace("admin");
-          console.log(this.tokenStorage.getUser());
         }
       },
       err => {

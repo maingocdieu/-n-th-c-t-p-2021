@@ -56,6 +56,58 @@ export class ProductService {
     return this.httpClient.get(baseURL + '/'+ 'getAll');
   }
 
+  checkIdProduct(id) : Observable<any> {
+    return this.httpClient.get(baseURL + '/check/' + id);
+  }
  
  
+  insertOder(data):Observable<any> {
+    return this.httpClient.post(baseURL+ "/checkout" , data, {
+      headers: {
+        "Content-Type": "application/json; charset=utf-8"
+      }});
+
+  }
+
+
+  getListOder():Observable<any> {
+    return this.httpClient.get(baseURL + "/getAllOder");
+  }
+ 
+  getListPhieuNhap():Observable<any> {
+    return this.httpClient.get(baseURL + "/getPhieuNhap")
+  }
+
+  getDetailPhieuNhapById(id):Observable<any> {
+    return this.httpClient.get(baseURL + "/getPhieuNhapById/"+ id)
+  }
+
+  updateChiTietPhieuNhap(data) : Observable<any> {
+      return this.httpClient.post(baseURL+ "/updatechitietpn", data);
+  }
+
+  deletePn(id) : Observable<any> {
+    return this.httpClient.post(baseURL+ "/deletepn", id);
+  }
+
+  deleteChiTietPhieuNhap(data): Observable<any> {
+    return this.httpClient.post(baseURL+ "/deleteChiTietPn",data );
+  }
+
+
+  InsertChiTietPhieuNhap(data) : Observable<any> {
+     return this.httpClient.post(baseURL+ "/insertChiTietPN",data );
+  }
+
+  updateStatus(data):Observable<any> {
+    return this.httpClient.post(baseURL+ "/updateStatus", data);
+  }
+
+  deleteOrder(data): Observable<any> {
+    return this.httpClient.post(baseURL+ "/deleteOrder", data);
+  }
+
+  searchProducts(data):Observable<any> {
+    return this.httpClient.get(baseURL + '/search/' + data);
+  }
 }

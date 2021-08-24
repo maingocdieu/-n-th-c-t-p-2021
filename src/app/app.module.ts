@@ -7,7 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
 
-import { FormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CanActivateRouteGuard } from './can-activate-route.guard';
 import { AdminModule } from './admin-page/admin.module';
@@ -17,6 +17,9 @@ import { MatSliderModule } from '@angular/material/slider';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { SelectRequiredValidatorDirective } from './validators/select.required.directive';
 import { CommonModule } from '@angular/common';
+import { SearchComponent } from './user-page/search/search.component';
+import { ProductSearchComponent } from './user-page/product-search/product-search.component';
+import { UpdateAcountComponent } from './user-page/update-acount/update-acount.component';
 
 
 @NgModule({
@@ -25,9 +28,9 @@ import { CommonModule } from '@angular/common';
     LoginComponent,
     RegisterComponent,
     SelectRequiredValidatorDirective,
-    
   ],
   imports: [
+    ReactiveFormsModule   ,
     MatSliderModule,
     MatDatepickerModule,
     CommonModule,
@@ -37,7 +40,6 @@ import { CommonModule } from '@angular/common';
     UserModule,
     AdminModule,
     AppRoutingModule,
-   
     BrowserAnimationsModule
   ],
   providers: [CanActivateRouteGuard],
