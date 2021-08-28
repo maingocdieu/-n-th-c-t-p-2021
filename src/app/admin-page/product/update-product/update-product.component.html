@@ -1,0 +1,97 @@
+<form  [formGroup]="productDetailForm">
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+  <thead>
+    <tr>
+      <th style="width: 250px;">Sản phẩm</th>
+      <th style="width: 250px;">Thương hiệu</th>
+      <th style="width: 250px;">Màu sắc </th>
+      <th style="width: 250px;">Kích thước</th>
+      <th style="width: 250px;">Giá</th>
+    </tr>
+  </thead>
+
+  
+  <tbody >
+
+    <tr >
+      <td>
+        <div class="form-group">
+          <select   appSelectValidator formControlName="productId" class="custom-select mr-sm-2" id="inlineFormCustomSelect" value = '-1'
+            style="margin-bottom: 0;">
+           
+            <option [disabled]  = "true" *ngFor="let product of listProduct" [value]="product.id">{{product.nameProduct}}
+            </option>
+          </select>
+        </div>
+
+        <label style="color: red;"
+          *ngIf="productDetailForm.get('productId').errors?.producterrow && isValidFormSubmitted != null && !isValidFormSubmitted"
+          class="error">
+          Sản phẩm không thể thiếu
+        </label>
+      </td>
+
+      <td>
+        <div class="form-group">
+          <select appSelectValidator formControlName="supllierId" class="custom-select mr-sm-2" id="inlineFormCustomSelect" value = '-1'
+            style="margin-bottom: 0;">
+            <option [value] = '-1' selected >Choose...</option>
+            <option *ngFor="let supplier of listSupplier" [value]="supplier.id">{{supplier.nameSupplier}}
+            </option>
+          </select>
+        </div>
+
+        <label style="color: red;"
+          *ngIf="productDetailForm.get('productId').errors?.producterrow && isValidFormSubmitted != null && !isValidFormSubmitted"
+          class="error">
+          Nhà cung cấp không để trống
+        </label>
+      </td>
+      <td>
+        <div class="form-group">
+          <select appSelectValidator formControlName="colorId" class="custom-select mr-sm-2" id="inlineFormCustomSelect" value = '-1'
+            style="margin-bottom: 0;">
+            <option [value] = '-1' selected >Choose...</option>
+            <option *ngFor="let color of listColor" [value]="color.id">{{color.nameColor}}
+            </option>
+          </select>
+        </div>
+
+        <label style="color: red;"
+          *ngIf="productDetailForm.get('colorId').errors?.producterrow && isValidFormSubmitted != null && !isValidFormSubmitted"
+          class="error">
+           Mau không được để trống
+        </label>
+      </td>
+      <td>
+        <div class="form-group">
+          <select appSelectValidator formControlName="sizeId" class="custom-select mr-sm-2" id="inlineFormCustomSelect" value = '-1'
+            style="margin-bottom: 0;">
+            <option [value] = '-1' selected>Choose...</option>
+            <option *ngFor="let size of listSize" [value]="size.id">{{size.namesize}}
+            </option>
+          </select>
+        </div>
+        <label style="color: red;"
+          *ngIf="productDetailForm.get('sizeId').errors?.producterrow && isValidFormSubmitted != null && !isValidFormSubmitted"
+          class="error">
+            Kích thước không thể thiếu
+        </label>
+      </td>
+      <td><input type="number" id="quantity" class="form-control " formControlName="price">
+        <label style="color: red;"
+          *ngIf="productDetailForm.get('price').errors?.required && isValidFormSubmitted != null && !isValidFormSubmitted"
+          class="error">
+          Giá không được bỏ trống
+        </label>
+      </td>
+    </tr>
+
+  </tbody>
+
+
+</table>
+
+<button type="button" class="btn btn-success" [disabled]="!productDetailForm.valid" [mat-dialog-close]="productDetailForm.value">{{this.data.button}}</button>
+
+</form>

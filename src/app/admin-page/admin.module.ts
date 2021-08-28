@@ -30,6 +30,15 @@ import { ListphieunhapComponent } from './phieunhap/listphieunhap/listphieunhap.
 import { ChitietphieunhapComponent } from './phieunhap/chitietphieunhap/chitietphieunhap.component';
 import { UpdatePNComponent } from './phieunhap/update-pn/update-pn.component';
 import { UerAdminComponent } from './uer-admin/uer-admin.component';
+import { ColorlistComponent } from './color/colorlist/colorlist.component';
+import { ColordialogComponent } from './color/colordialog/colordialog.component';
+import { SizedialogComponent } from './size/sizedialog/sizedialog.component';
+import { ListSizeComponent } from './size/list-size/list-size.component';
+import { ListSupplierComponent } from './supplier/list-supplier/list-supplier.component';
+import { SupplierDialogComponent } from './supplier/supplier-dialog/supplier-dialog.component';
+import { InsertProductDetailComponent } from './product/insert-product-detail/insert-product-detail.component';
+import { ProductdetailComponent } from './product/productdetail/productdetail.component';
+import { UpdateProductComponent } from './product/update-product/update-product.component';
 
 @NgModule({
   declarations: [
@@ -47,8 +56,18 @@ import { UerAdminComponent } from './uer-admin/uer-admin.component';
     OderlistComponent,
     OrderDetailComponent,
     ListphieunhapComponent,
+    ProductdetailComponent,
     ChitietphieunhapComponent,
     UpdatePNComponent,
+    ColorlistComponent,
+    ColordialogComponent,
+    SizedialogComponent,
+    ListSizeComponent,
+    ListSupplierComponent,
+    SupplierDialogComponent,
+    InsertProductDetailComponent,
+    UpdateProductComponent,
+  
   ],
   imports: [
     MatSliderModule,

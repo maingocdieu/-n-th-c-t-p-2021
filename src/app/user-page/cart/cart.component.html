@@ -23,6 +23,7 @@
                           <thead class="thead-dark">
                               <tr>
                                   <th>Tên sản phẩm</th>
+                                  <th>Chi tiết</th>
                                   <th>Giá sản phẩm</th>
                                   <th>Số lượng</th>
                                   <th>Tổng giá</th>
@@ -37,6 +38,7 @@
                                           <p>{{tempCartItem.name}}</p>
                                       </div>
                                   </td>
+                                  <td>{{tempCartItem.color}}, {{tempCartItem.size}} {{tempCartItem.supplier}}</td>
                                   <td>{{ tempCartItem.giaBanRa | currency: 'USD' }}</td>
                                   <td>
                                       <div class="qty">
@@ -58,7 +60,6 @@
           <div class="col-lg-4">
               <div class="cart-page-inner">
                   <div class="row">
-                      
                       <div class="col-md-12">
                           <div class="cart-summary">
                               <div class="cart-content">

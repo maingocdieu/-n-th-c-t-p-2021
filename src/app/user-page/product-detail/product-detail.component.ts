@@ -17,6 +17,7 @@ export class ProductDetailComponent implements OnInit {
   quantity = 0;
   listProductRelated: any;
   products: any;
+  listColorOfProduct: any;
   @ViewChild('alertDeleteDialog', { static: false })
   alertDeleteDialog: CustomalertComponent;
   currentItem = 'Sản phẩm thạm thời hết hàng';
@@ -40,19 +41,19 @@ export class ProductDetailComponent implements OnInit {
     });
 
     this.product = await this.productService.getById(id).toPromise();
- 
   }
 
-  addToCart(theProduct: any) {
-
-    const theCartItem = new CartItem(theProduct);
-    if(theCartItem.quantity >theCartItem.soLuongTon) {
-        this.alertDeleteDialog.show();
-        return;
-    }
-   
+  addToCart(theProduct: any, product: any) {
+    const theCartItem = new CartItem(theProduct, product);
+    console.log(theProduct)
+    // if(theCartItem.quantity >theCartItem.soLuongTon) {
+    //     this.alertDeleteDialog.show();
+    //     return;
+    // }
     this.cartService.addToCart(theCartItem);
   }
+
+
 
   getDetailProduct(id) {
     this.router.navigateByUrl("product/"+ id)

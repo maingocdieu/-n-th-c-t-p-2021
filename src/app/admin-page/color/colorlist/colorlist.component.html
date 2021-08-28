@@ -1,0 +1,42 @@
+<h1>dâdada</h1>
+
+<div class="main__container" style="width: 1200px; margin-left: 40px;">
+  <div class="product__header">
+    <div class="product__header-bg">
+      <i class="fa fa-home" aria-hidden="true"> </i>
+      <span class="pesudu"> / Home / </span>
+      <span class="pesudu">Màu sắc sản phẩm</span>
+    </div>
+  </div>
+  <div class="product__list">
+    <div class="table_product">
+      <div class="button__adduser">
+        <button class="user__add btn__user" (click)="addandUpdateColor(null)" >
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          <span>Thêm màu sắc</span>
+        </button>
+        
+      </div>
+      <table class="table" >
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Tên màu sản phẩm</th>
+            <th>Cập nhật</th>
+            <th>
+             Xóa màu sắc
+            </th>
+          </tr>
+        </thead>
+        <tbody >
+          <tr *ngFor="let color of colors">
+            <td>{{color.nameColor}}</td>
+            <td><a ><i class="far fa-edit" aria-hidden="true" (click)="addandUpdateColor(color)"></i></a></td>
+            <td><button type="button" class="btn btn-danger" (click) = "XoaColor(color.id)">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<app-dialog #confirmDeleteDialog (yesClicked)="deleteColor()"></app-dialog>
+<app-alert #alertDeleteDialog  [item]="currentItem"></app-alert>

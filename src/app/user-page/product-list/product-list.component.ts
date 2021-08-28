@@ -48,16 +48,16 @@ export class ProductListComponent implements OnInit {
     this.router.navigateByUrl("product/"+ id)
   }
 
-  addToCart(theProduct: any) {
+  // addToCart(theProduct: any) {
 
-    const theCartItem = new CartItem(theProduct);
-    if(theCartItem.quantity >theCartItem.soLuongTon) {
-        this.alertDeleteDialog.show();
-        return;
-    }
+  //   const theCartItem = new CartItem(theProduct);
+  //   if(theCartItem.quantity >theCartItem.soLuongTon) {
+  //       this.alertDeleteDialog.show();
+  //       return;
+  //   }
    
-    this.cartService.addToCart(theCartItem);
-  }
+  //   this.cartService.addToCart(theCartItem);
+  // }
 
  
 }

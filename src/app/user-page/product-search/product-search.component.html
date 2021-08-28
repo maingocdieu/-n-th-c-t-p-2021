@@ -64,7 +64,7 @@
       </div>
       <div class="row align-items-center product-slider product-slider-4">
           <div class="col-lg-3" *ngFor = "let item of products" style="margin-top: 20px;" >
-              <div class="product-item">
+              <div class="product-item" *ngIf = "item.productDetail.length >0">
                   <div class="product-title">
                       <a href="#">{{item.nameProduct}}</a>
                       <div class="ratting">
@@ -87,7 +87,7 @@
                   </div>
                   <div class="product-price">
                       <h3><span>$</span>{{item.giaBanRa}}</h3>
-                      <button class="btn" href="" (click)="addToCart(item)"><i class="fa fa--shopping-cart"></i>Buy Now</button>
+                      <!-- <button class="btn" href="" (click)="addToCart(item)"><i class="fa fa--shopping-cart"></i>Buy Now</button> -->
                   </div>
               </div>
           </div>

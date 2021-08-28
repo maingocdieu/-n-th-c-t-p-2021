@@ -112,15 +112,17 @@ h2 {
     border: 1px solid #FF6F61;
 }
 
-.btn:hover,
+
 .btn:active,
 .btn:focus {
     color: #ffffff;
-    background: #FF6F61;
+   
     box-shadow: none;
 }
 
-
+.btn:hover {
+    background-color: #FF6F61;
+}
 /**********************************/
 /******* Normal Slider CSS ********/
 /**********************************/

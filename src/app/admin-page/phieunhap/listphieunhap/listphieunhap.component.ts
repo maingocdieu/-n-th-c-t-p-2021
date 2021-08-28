@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+
 import { AlertComponent } from 'src/app/common/alert/alert.component';
 import { ProductService } from 'src/app/_services/product.service';
 import { ChitietphieunhapComponent } from '../chitietphieunhap/chitietphieunhap.component';
@@ -22,6 +23,7 @@ export class ListphieunhapComponent implements OnInit {
 
  async getListPhieuNhap() {
   this.listPhieuNhap =  await this.productService.getListPhieuNhap().toPromise();
+  console.log(this.listPhieuNhap);
   }
 
   openDialogDetail(item) {
@@ -38,16 +40,14 @@ export class ListphieunhapComponent implements OnInit {
 
 
   xoaPhieuNhap(item) {
-    if(item.products.length >0) {
-      this.currentItem = "Bạn không thể xóa"
-      this.alertDeleteDialog.show();
-      return;
-    } else {
+    {
       this.productService.deletePn(item.id).subscribe(res => {
         if(res == true) {
           this.getListPhieuNhap();
+        } else {
+          this.currentItem = "Bạn không thể xóa"
+        this.alertDeleteDialog.show();
         }
-       
       });
     }
   }

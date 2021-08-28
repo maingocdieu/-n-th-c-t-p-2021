@@ -22,12 +22,16 @@ import { ProductSearchComponent } from './user-page/product-search/product-searc
 import { UpdateAcountComponent } from './user-page/update-acount/update-acount.component';
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
     SelectRequiredValidatorDirective,
+   
+   
   ],
   imports: [
     ReactiveFormsModule   ,

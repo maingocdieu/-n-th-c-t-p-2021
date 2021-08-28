@@ -47,16 +47,17 @@
               <tr *ngFor="let emp of employees.controls; let i = index" [formGroupName]="i">
                 <td>
                   <div class="form-group">
-                    <select appSelectValidator formControlName="productId" class="custom-select mr-sm-2" id="inlineFormCustomSelect" value = '-1'
+                    <select appSelectValidator formControlName="productDetailId" class="custom-select mr-sm-2" id="inlineFormCustomSelect" value = '-1'
                       style="margin-bottom: 0;">
                       <option [value] = '-1' selected>Choose...</option>
-                      <option *ngFor="let product of listProduct" [value]="product.id">{{product.nameProduct}}
+                      <option *ngFor="let product of listProduct" [value]="product.id">{{product.product.nameProduct}}, {{product.color.nameColor}},
+                        {{product.size.namesize}},  {{product.supplier.nameSupplier}}
                       </option>
                     </select>
                   </div>
 
                   <label style="color: red;"
-                    *ngIf="employees.controls[i].get('productId').errors?.producterrow && isValidFormSubmitted != null && !isValidFormSubmitted"
+                    *ngIf="employees.controls[i].get('productDetailId').errors?.producterrow && isValidFormSubmitted != null && !isValidFormSubmitted"
                     class="error">
                     Sản phẩm không thể thiếu
                   </label>

@@ -16,11 +16,11 @@
           <div class="col-lg-8">
               <div class="product-detail-top">
                   <div class="row align-items-center">
-                      <div class="col-md-7">
+                      <div class="col-md-5">
                         <img class="customImg" src="http://localhost:8080/uploads/{{product.nameImage}}" alt="Product Image">
                       </div>
-                      <div class="col-md-5">
-                          <div class="product-content" *ngIf = 'product' >
+                      <div class="col-md-7">
+                          <!-- <div class="product-content" *ngIf = 'product' >
                               <div class="title"><h2>{{product.nameProduct}}</h2></div>
                               <div class="ratting">
                                   <i class="fa fa-star"></i>
@@ -40,7 +40,29 @@
                               <div class="action">
                                 <button type="button" class="btn btn-warning" (click) = "addToCart(product)">Thêm vào giỏ hàng</button>
                               </div>
-                          </div>
+                          </div> -->
+                          <div class="title"><h2>Tên sản phẩm:  {{product.nameProduct}}</h2></div>
+                          <table class="table" *ngIf = 'product'>
+                           
+                            <thead>
+                              <tr>
+                             
+                                <th scope="col">Chi tiet</th>
+                                <th scope="col">Số lượng tồn</th>
+                                <th scope="col">Giá</th>
+                                <th scope="col"></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor = "let item of product.productDetail">
+                                <td>Màu :{{item.color.nameColor}}, Kích thước: {{item.size.namesize}}, Hãng{{item.supplier.nameSupplier}}</td>
+                                <td>{{item.soLuong}}</td>
+                                <td>{{item.price | currency: "VND" }}</td>
+                                <td><button type="button" class="btn btn-warning" (click) = "addToCart(item, product)">Thêm vào giỏ hàng</button></td>
+                              </tr>
+                             
+                            </tbody>
+                          </table>
                       </div>
                   </div>
               </div>
@@ -135,7 +157,7 @@
                               </div>
                               <div class="product-price">
                                   <h3><span></span>{{item.giaBanRa| currency: "VND" }}</h3>
-                                  <a class="btn"  (click) = "addToCart(product)" ><i class="fa fa-shopping-cart"></i>Mua ngay</a>
+                                  <!-- <a class="btn"  (click) = "addToCart(product)" ><i class="fa fa-shopping-cart"></i>Mua ngay</a> -->
                               </div>
                           </div>
                       </div>

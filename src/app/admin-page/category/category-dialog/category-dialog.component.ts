@@ -25,7 +25,7 @@ export class CategoryDialogComponent implements OnInit {
     if (data.data == null) {
       this.category.name = '';
       this.category.code='';
-      this.buttonName = 'Register';
+      this.buttonName = 'Thêm danh mục';
     } else {
       this.category.id = data.data.id;
       this.category.name = data.data.name;

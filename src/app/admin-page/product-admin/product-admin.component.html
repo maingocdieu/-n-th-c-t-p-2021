@@ -1,4 +1,4 @@
-<div id="content-wrapper" style="width: 158%;">
+<div id="content-wrapper" style="width: 100%;">
 
   <div class="container-fluid">
 
@@ -20,23 +20,26 @@
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" *ngIf = "listProduct">
             <thead>
               <tr>
-                <th>Tên sản phẩm</th>
-                <th>Ảnh sản phẩm</th>
-                <th>Số lượng</th>
-                <th>Giá sản phẩm</th>
-                <th>Ngày tạo sản phẩm</th>
-                <th>Hành đông</th>>
+                <th  style="width: 200px;">Tên sản phẩm</th>
+                <th  style="width: 200px;">Ảnh sản phẩm</th>
+                <th  style="width: 200px;">Số lượng</th>
+                <th  style="width: 200px;">Giá sản phẩm</th>
+                <th  style="width: 200px;">Ngày tạo sản phẩm</th>
+                <th  style="width: 350px;">Hành đông</th>>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let item of listProduct">
+                
                 <th>{{item.nameProduct}}</th>
                 <th><img src="http://localhost:8080/uploads/{{item.nameImage}}" style="width: 50px; height: 100%;" alt=""></th>
                 <th>{{item.soLuong}}</th>
                 <th>{{item.giaBanRa}}</th>
                 <th>{{item.createdDate}}</th>
                 <th><i class="far fa-edit" style="color: darkgreen; font-size:x-large;"  [routerLink]="['product/edit',item.id]"></i>
-                  <i class="fas fa-backspace" style="color: darkgreen; font-size:x-large;margin-left: 40px;" (click) = "showConfirmDialog(item.id)"></i></th>
+                  <i class="fas fa-backspace" style="color: darkgreen; font-size:x-large;margin-left: 40px;" (click) = "showConfirmDialog(item.id)"></i>
+                  <button type="button"  class="btn btn-info ml-sm-4"  (click) = "openDialogDetailProduct(item.id)">Chi tiết</button>
+                </th>
               </tr>
             </tbody>
           </table>

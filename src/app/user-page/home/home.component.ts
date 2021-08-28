@@ -37,9 +37,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPage();
-    
+  
   }
-
 
   getPaginationWithIndex(index) {
     this.product.page = index;
@@ -87,6 +86,9 @@ export class HomeComponent implements OnInit {
         this.listProduct = null;
       } else {
         this.listProduct = res.content;
+
+        
+    console.log(this.listProduct)
         this.totalPages = res.totalPages;
         this.pageIndexes = Array(this.totalPages)
           .fill(0)
@@ -100,13 +102,13 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl("product/"+ id)
   }
 
-  addToCart(theProduct: any) {
-    const theCartItem = new CartItem(theProduct);
-    if(theCartItem.quantity >theCartItem.soLuongTon) {
-        this.alertDeleteDialog.show();
-        return;
-    }
-    this.cartService.addToCart(theCartItem);
-  }
+  // addToCart(theProduct: any) {
+  //   const theCartItem = new CartItem(theProduct);
+  //   if(theCartItem.quantity >theCartItem.soLuongTon) {
+  //       this.alertDeleteDialog.show();
+  //       return;
+  //   }
+  //   this.cartService.addToCart(theCartItem);
+  // }
 
 }

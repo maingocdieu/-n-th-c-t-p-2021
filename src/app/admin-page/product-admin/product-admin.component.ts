@@ -4,6 +4,7 @@ import { AlertComponent } from 'src/app/common/alert/alert.component';
 import { MyDialogComponent } from 'src/app/common/my-dialog/my-dialog.component';
 import { ProductService } from 'src/app/_services/product.service';
 import { AddProductComponent } from '../product/add-product/add-product.component';
+import { ProductdetailComponent } from '../product/productdetail/productdetail.component';
 
 @Component({
   selector: 'app-product-admin',
@@ -148,8 +149,17 @@ export class ProductAdminComponent implements OnInit {
     this.confirmDeleteDialog.close();
   }
 
-  
-    
-  
+
+  openDialogDetailProduct(item) {
+    return this.dialog.open(ProductdetailComponent, {
+      width: '70%',
+      height: '70%',
+      panelClass: 'custom-modalbox',
+      autoFocus: false,
+      data: {
+        data: item,
+      },
+    });
+  }
 
 }

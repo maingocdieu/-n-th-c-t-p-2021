@@ -36,12 +36,12 @@ export class ProductSearchComponent implements OnInit {
     this.router.navigateByUrl("product/"+ id)
   }
 
-  addToCart(theProduct: any) {
-    const theCartItem = new CartItem(theProduct);
-    if(theCartItem.quantity >theCartItem.soLuongTon) {
-        this.alertDeleteDialog.show();
-        return;
-    }
-    this.cartService.addToCart(theCartItem);
-  }
+  // addToCart(theProduct: any) {
+  //   const theCartItem = new CartItem(theProduct);
+  //   if(theCartItem.quantity >theCartItem.soLuongTon) {
+  //       this.alertDeleteDialog.show();
+  //       return;
+  //   }
+  //   this.cartService.addToCart(theCartItem);
+  // }
 }

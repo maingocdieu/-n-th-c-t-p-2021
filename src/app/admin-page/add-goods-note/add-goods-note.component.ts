@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ProductService } from 'src/app/_services/product.service';
+import { ProductDetailService } from 'src/app/_services/productdetail.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
 @Component({
@@ -31,7 +32,7 @@ export class AddGoodsNoteComponent implements OnInit {
 
 
   constructor(private formBuilder: FormBuilder, private tokenStorage: TokenStorageService, private productService: ProductService
-  ) { }
+  , private productDetailService: ProductDetailService) { }
 
 
 
@@ -44,17 +45,19 @@ export class AddGoodsNoteComponent implements OnInit {
     });
     await this.getAllProduct();
 
+    console.log(this.listProduct);
+
   }
 
   async getAllProduct() {
-    this.listProduct = await this.productService.readListProduct().toPromise();
+    this.listProduct = await this.productDetailService.getProductDetail().toPromise();
   }
 
   createEmpFormGroup() {
     return this.formBuilder.group({
       amount: ['', [Validators.required]],
       price: ['', [Validators.required, Validators.min(0)]],
-      productId: ['-1', [electionValidate],
+      productDetailId: ['-1', [electionValidate],
       ]
     })
   }
@@ -80,13 +83,13 @@ export class AddGoodsNoteComponent implements OnInit {
   }
 
   deletePhieuNhap(idx: number) {
-    if(this.employees.length >1) {
+    if (this.employees.length > 1) {
       this.employees.removeAt(idx);
     }
-  
+
   }
   addPhieuNhap() {
-    this.chitietphieunhap =true;
+    this.chitietphieunhap = true;
   }
   onFormSubmit() {
     this.isValidFormSubmitted = false;
@@ -105,17 +108,19 @@ export class AddGoodsNoteComponent implements OnInit {
       date = '0' + (this.teamForm.value.ngayTao.getDate())
     }
     this.phieuNhap.ngayTao = (this.teamForm.value.ngayTao.getFullYear()).toString() + '-' + month + '-' + date;
+
+    console.log(this.phieuNhap.listPhieuNhap);
     this.productService.insertPhieuNhap(JSON.stringify(this.phieuNhap)).subscribe((data) => {
       if (data != null) {
         this.messageSucess = true;
         this.teamForm.reset();
       }
     },
-    (error) => {
-      alert("Có sản phẩm giống nhau trên giỏ hàng");
-      return;
-    });
-   }
+      (error) => {
+        alert("Có sản phẩm giống nhau trên giỏ hàng");
+        return;
+      });
+  }
 }
 
 function electionValidate(control: AbstractControl): { [key: string]: any } | null {

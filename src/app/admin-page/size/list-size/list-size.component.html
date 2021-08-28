@@ -1,0 +1,42 @@
+<h1>dâdada</h1>
+
+<div class="main__container" style="width: 1200px; margin-left: 40px;">
+  <div class="product__header">
+    <div class="product__header-bg">
+      <i class="fa fa-home" aria-hidden="true"> </i>
+      <span class="pesudu"> / Home / </span>
+      <span class="pesudu">Kích cỡ sản phẩm</span>
+    </div>
+  </div>
+  <div class="product__list">
+    <div class="table_product">
+      <div class="button__adduser">
+        <button class="user__add btn__user" (click)="addandUpdateSize(null)" >
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          <span>Thêm size</span>
+        </button>
+        
+      </div>
+      <table class="table" >
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Tên kích thước</th>
+            <th>Cập nhật</th>
+            <th>
+             Xóa kích thước
+            </th>
+          </tr>
+        </thead>
+        <tbody >
+          <tr *ngFor="let size of sizes">
+            <td>{{size.namesize}}</td>
+            <td><a ><i class="far fa-edit" aria-hidden="true" (click)="addandUpdateSize(size)"></i></a></td>
+            <td><button type="button" class="btn btn-danger" (click) = "XoaSize(size.id)">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<app-dialog #confirmDeleteDialog (yesClicked)="deleteSize()"></app-dialog>
+<app-alert #alertDeleteDialog  [item]="currentItem"></app-alert>

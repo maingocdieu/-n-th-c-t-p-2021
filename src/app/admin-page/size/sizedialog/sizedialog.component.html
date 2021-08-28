@@ -1,0 +1,25 @@
+<div class="div">
+ 
+  <form [formGroup]="sizeForm">
+    <div class="row mb-3">
+
+      <label for="inputEmail3" class="col-sm-2 col-form-label">Tên màu</label>
+
+
+      <div class="col-sm-10">
+        <input type="text" class="form-control" formControlName="nameSize" [(ngModel)]="size.nameSize" />
+        <label style="color: red;" *ngIf="f.nameSize.errors?.required && f.nameSize.touched" class="error">
+          Tên màu sắc phải bắt buộc
+        </label>
+        <label style="color: red;" *ngIf="f.nameSize.errors?.courseExist && data.data==null" class="error">
+         Màu sản phảm đã tồn tại
+        </label>
+      </div>
+    </div>
+    
+    <button type="submit" class="btn btn-primary category__addbutton" [disabled]="!sizeForm.valid"
+      [mat-dialog-close]="size">
+      {{buttonName}}
+    </button>
+  </form>
+</div>
