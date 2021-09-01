@@ -43,9 +43,9 @@ export class ProductDetailComponent implements OnInit {
     this.product = await this.productService.getById(id).toPromise();
   }
 
-  addToCart(theProduct: any, product: any) {
-    const theCartItem = new CartItem(theProduct, product);
-    console.log(theProduct)
+  addToCart(itemDetail: any, product: any) {
+    const theCartItem = new CartItem(itemDetail, product);
+
     // if(theCartItem.quantity >theCartItem.soLuongTon) {
     //     this.alertDeleteDialog.show();
     //     return;
@@ -56,7 +56,8 @@ export class ProductDetailComponent implements OnInit {
 
 
   getDetailProduct(id) {
-    this.router.navigateByUrl("product/"+ id)
+    this.router.navigateByUrl("product/"+ id);
+window.location.replace("product/"+ id);
   }
 
  

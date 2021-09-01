@@ -1,4 +1,4 @@
-<div id="content-wrapper" style="width: 115%;">
+<div id="content-wrapper" style="">
 
   <div class="container-fluid">
 
@@ -27,7 +27,7 @@
                 <th>Ngày tạo đơn hàng </th>
                 <th>Tổng giá</th>
                 <th>Trạng thái đơn hàng</th>
-                <th>Hành đông</th>
+                <th style="width: 200px;">Hành đông</th>
                 <th>Duyệt đơn hàng</th>
               </tr>
             </thead>
@@ -37,7 +37,7 @@
                 <th>{{item.createdBy}}</th>
                 <th>{{item.sdt}}</th>
                 <th>{{item.diaChi}}</th>
-                <th>{{item.createdDate|  date:'short'}}</th>
+                <th>{{item.createdDate|   date: 'dd/MM/yyyy'}}</th>
                 <th>{{item.totalPrice}}</th>
                 <th>
                   <span *ngIf = "item.status else elseBlock">
@@ -58,6 +58,17 @@
             </tbody>
           </table>
         </div>
+
+        <ul class="pagination justify-content-lg-end" style="margin-right: 15px;
+        margin-bottom: 20px;">
+          <li class="page-item"><a  class="page-link" (click) ="previousClick()">Previous</a></li>
+          <li *ngFor='let index of pageIndexes' class="page-item" [ngClass]="active(index)" >
+                  <a  class="page-link" (click)="getPaginationWithIndex(index)">
+                    {{index + 1}}
+                  </a>
+          </li>
+          <li class="page-item"><a  class="page-link" (click)= "nextClick()">Next</a></li>
+        </ul>
       </div>
    
     </div>
@@ -65,16 +76,7 @@
   
 
   </div>
-  <!-- /.container-fluid -->
 
-  <!-- Sticky Footer -->
-  <footer class="sticky-footer">
-    <div class="container my-auto">
-      <div class="copyright text-center my-auto">
-        <span>Copyright © Your Website 2019</span>
-      </div>
-    </div>
-  </footer>
 
 </div>
 

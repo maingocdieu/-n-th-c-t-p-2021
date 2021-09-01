@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../_services/auth.service';
+import { AuthService } from 'src/app/_services/auth.service';
+import { RoleService } from 'src/app/_services/role.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-create-user',
+  templateUrl: './create-user.component.html',
+  styleUrls: ['./create-user.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class CreateUserComponent implements OnInit {
 
- 
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
-
+  listRole: any;
 
 
   userForm: FormGroup;
@@ -23,6 +23,7 @@ export class RegisterComponent implements OnInit {
     confirmPassword: '',
     passwordGroup: '',
     email: '',
+    role: ''
   };
 
 
@@ -43,24 +44,29 @@ export class RegisterComponent implements OnInit {
     },
     email: {
       required: 'Email phải có',
-      email: ' Email Không hợp lệ'
-      
+      email: "Email không hợp lệ"
     },
+
+    role: {
+      required: 'Email phải có',
+    }
    
   };
 signUprequest = {
     username: '',
     email: '',
     password: '',
-    role:["user"]
+    role:[]
   }
+  constructor(private authService: AuthService, private formBuilder: FormBuilder, private roleService: RoleService) { }
 
-  constructor(private authService: AuthService, private formBuilder: FormBuilder) { }
-
-  ngOnInit(): void {
+ async ngOnInit() {
+  
     this.userForm = this.formBuilder.group({
+      role: ['-1', [electionValidate]],
       userName: ['',[Validators.required]],
       email: ['',[Validators.required, Validators.email]],
+     
       passwordGroup: this.formBuilder.group(
         {
           passWord: ['', [Validators.required]],
@@ -68,15 +74,22 @@ signUprequest = {
         },
         { validators: matchPassWord }
       ),
+      
+
     });
+
+    await  this.getRole();
   }
 
+
+  async getRole() {
+    this.listRole =  await this.roleService.readAll().toPromise();
+  }
   onSubmit(): void {
 
     if(this.userForm.invalid) {
       this.userForm.markAllAsTouched();
       this.logKeyValuePairs(this.userForm);
-      
      }
 
      else {
@@ -85,7 +98,13 @@ signUprequest = {
        this.signUprequest.password = this.userForm
          .get('passwordGroup')
          .get('passWord').value;
-      this.authService.register(this.signUprequest).subscribe(
+
+      if(this.userForm.get('role').value === 'ROLE_ADMIN') {
+        this.signUprequest.role.push('admin');
+      } else {
+        this.signUprequest.role.push('user');
+      }
+       this.authService.register(this.signUprequest).subscribe(
         data => {
           this.isSuccessful = true;
           this.isSignUpFailed = false;
@@ -102,6 +121,7 @@ signUprequest = {
   logKeyValuePairs(group: FormGroup = this.userForm): void {
     Object.keys(group.controls).forEach((key: string) => {
       const abstractControl = group.get(key);
+      
       this.formErrors[key] = '';
       if (
         abstractControl &&
@@ -132,4 +152,13 @@ function matchPassWord(group: AbstractControl): { [key: string]: any } | null {
   } else {
     return { passwordMissMatch: true };
   }
+}
+
+function electionValidate(control: AbstractControl): { [key: string]: any } | null {
+  const product: string = control.value;
+  if (product !== '-1') {
+    return null;
+  } else {
+    return { 'producterrow': true };
+  } 
 }

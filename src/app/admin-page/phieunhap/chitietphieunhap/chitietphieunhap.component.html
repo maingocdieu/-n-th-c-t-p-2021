@@ -33,7 +33,7 @@
                 <th>{{item.amount * item.price}}</th> 
                 <th>
                   <i (click) = "UpdatePhieuNhap(item)" class="fas fa-user-edit" style="color: darkgreen; font-size:x-large;margin-left: 40px;"></i>
-                  <i (click) = "deletectpn(item)" class="fas fa-backspace" style="color: darkgreen; font-size:x-large;margin-left: 40px;" ></i>
+                  <i (click) = "showConfirmDialog(item)" class="fas fa-backspace" style="color: darkgreen; font-size:x-large;margin-left: 40px;" ></i>
                 </th>
               </tr>
             </tbody>
@@ -47,3 +47,6 @@
 
   
 </div>
+
+<app-alert #alertDeleteDialog [item]="currentItem" ></app-alert>
+<app-dialog #confirmDeleteDialog (yesClicked)=" deletectpn()"></app-dialog>

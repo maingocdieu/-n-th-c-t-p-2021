@@ -27,7 +27,7 @@ export class ProductSearchComponent implements OnInit {
     this.productService.searchProducts(theKeyword).subscribe(
       data => {
         this.products = data.content;
-        console.log(data)
+        console.log(this.products);
       }
     )
   }
@@ -36,12 +36,4 @@ export class ProductSearchComponent implements OnInit {
     this.router.navigateByUrl("product/"+ id)
   }
 
-  // addToCart(theProduct: any) {
-  //   const theCartItem = new CartItem(theProduct);
-  //   if(theCartItem.quantity >theCartItem.soLuongTon) {
-  //       this.alertDeleteDialog.show();
-  //       return;
-  //   }
-  //   this.cartService.addToCart(theCartItem);
-  // }
 }

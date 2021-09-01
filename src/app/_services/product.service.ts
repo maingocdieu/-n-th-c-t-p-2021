@@ -110,4 +110,13 @@ export class ProductService {
   searchProducts(data):Observable<any> {
     return this.httpClient.get(baseURL + '/search/' + data);
   }
+
+  getPagePhieuNhap(page):Observable<any> {
+    return this.httpClient.get(baseURL + '/getlistpn/' + page);
+  }
+
+
+  getPageOder(page):Observable<any> {
+    return this.httpClient.get(baseURL + "/getlistOrder/" + page);
+  }
 }

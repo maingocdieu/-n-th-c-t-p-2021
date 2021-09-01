@@ -25,7 +25,8 @@
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
-        <label style="color: red;" *ngIf="ngayTao.invalid && isValidFormSubmitted != null && !isValidFormSubmitted" class="error">
+        <label style="color: red;" *ngIf="ngayTao.invalid && isValidFormSubmitted != null && !isValidFormSubmitted"
+          class="error">
           Ngày nhập bắt buộc
         </label>
       </div>
@@ -35,8 +36,8 @@
             <thead>
               <tr>
                 <th>Sản phẩm</th>
-                <th>Số lượng</th>
                 <th>Giá</th>
+                <th>Số lượng</th>
                 <th>Tổng tiền</th>
                 <th>Xóa</th>
               </tr>
@@ -47,11 +48,12 @@
               <tr *ngFor="let emp of employees.controls; let i = index" [formGroupName]="i">
                 <td>
                   <div class="form-group">
-                    <select appSelectValidator formControlName="productDetailId" class="custom-select mr-sm-2" id="inlineFormCustomSelect" value = '-1'
-                      style="margin-bottom: 0;">
-                      <option [value] = '-1' selected>Choose...</option>
-                      <option *ngFor="let product of listProduct" [value]="product.id">{{product.product.nameProduct}}, {{product.color.nameColor}},
-                        {{product.size.namesize}},  {{product.supplier.nameSupplier}}
+                    <select appSelectValidator formControlName="productDetailId" class="custom-select mr-sm-2"
+                      id="inlineFormCustomSelect" value='-1' style="margin-bottom: 0;">
+                      <option [value]='-1' selected>Choose...</option>
+                      <option *ngFor="let product of listProduct" [value]="product.id">{{product.product.nameProduct}},
+                        {{product.color.nameColor}},
+                        {{product.size.namesize}}, {{product.supplier.nameSupplier}}
                       </option>
                     </select>
                   </div>
@@ -70,7 +72,7 @@
                     Giá không được bỏ trống
                   </label>
                 </td>
-                <td> <input type="text" class="form-control " id="quantity"  formControlName="amount"
+                <td> <input type="number" class="form-control " id="quantity" formControlName="amount"
                     placeholder="Example input">
                   <label style="color: red;"
                     *ngIf="employees.controls[i].get('amount').errors?.required && isValidFormSubmitted != null && !isValidFormSubmitted"
@@ -87,9 +89,12 @@
         </div>
       </div>
       <button type="button" class="btn btn-success ml-sm-4" (click)="onFormSubmit()">Submit</button>
-      <button type="button" class="btn btn-success" style="margin-left: 50px;" (click)="addEmployee()">Thêm phiếu nhập</button>
+      <button type="button" class="btn btn-success" style="margin-left: 50px;" (click)="addEmployee()">Thêm phiếu
+        nhập</button>
     </form>
     <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-    <div *ngIf = "messageSucess">Thêm thành công</div>
+    <div *ngIf="messageSucess">Thêm thành công</div>
   </div>
 </div>
+
+<app-alert #alertDeleteDialog [item]="currentItem"></app-alert>

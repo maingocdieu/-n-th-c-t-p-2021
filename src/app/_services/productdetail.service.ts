@@ -38,4 +38,8 @@ export class ProductDetailService {
         }}
       );
   }
+
+  deleteDetail(id: any) :Observable<any> {
+    return this.httpClient.post(baseURL + 'delete', id);
+  }
 }

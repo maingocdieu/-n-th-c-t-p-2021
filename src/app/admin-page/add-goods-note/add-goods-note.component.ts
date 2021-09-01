@@ -1,7 +1,8 @@
 import { stringify } from '@angular/compiler/src/util';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { AlertComponent } from 'src/app/common/alert/alert.component';
 import { ProductService } from 'src/app/_services/product.service';
 import { ProductDetailService } from 'src/app/_services/productdetail.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
@@ -13,6 +14,9 @@ import { TokenStorageService } from 'src/app/_services/token-storage.service';
 })
 export class AddGoodsNoteComponent implements OnInit {
 
+  @ViewChild('alertDeleteDialog', { static: false })
+  alertDeleteDialog: AlertComponent;
+  currentItem = '';
   chitietphieunhap = false;
   phieuNhap = {
     listPhieuNhap: [],
@@ -112,12 +116,14 @@ export class AddGoodsNoteComponent implements OnInit {
     console.log(this.phieuNhap.listPhieuNhap);
     this.productService.insertPhieuNhap(JSON.stringify(this.phieuNhap)).subscribe((data) => {
       if (data != null) {
-        this.messageSucess = true;
+        this.currentItem = "Thêm thành công";
+        this.alertDeleteDialog.show();
         this.teamForm.reset();
       }
     },
       (error) => {
-        alert("Có sản phẩm giống nhau trên giỏ hàng");
+       this.currentItem = "Sản phẩm trùng nhau";
+       this.alertDeleteDialog.show();
         return;
       });
   }

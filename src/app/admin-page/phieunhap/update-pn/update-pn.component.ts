@@ -19,7 +19,6 @@ export class UpdatePNComponent implements OnInit {
   
     
     if(this.data.data === null) {
-      console.log( "Dieu")
       this.detailForm = this.formBuilder.group({
         productId: ['-1', [electionValidate]],
         amount: ['', [Validators.required]],
@@ -27,16 +26,12 @@ export class UpdatePNComponent implements OnInit {
       });
     } else {
       this.detailForm = this.formBuilder.group({
-        productId: [this.data.data.productDetail.product.id, [electionValidate]],
+        productId: [this.data.data.productNoteId.productId, [electionValidate]],
         amount: [this.data.data.amount, [Validators.required]],
         price: [this.data.data.price, [Validators.required, Validators.min(21)]],
       });
     }
-    
     this.getAllProduct();
-
-   
-  
   }
   async getAllProduct() {
     this.listProduct = await this.productDetailService.getProductDetail().toPromise();
@@ -52,5 +47,4 @@ function electionValidate(control: AbstractControl): { [key: string]: any } | nu
   } else {
     return { 'producterrow': true };
   }
-
 }

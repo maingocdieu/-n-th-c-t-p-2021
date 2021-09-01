@@ -1,0 +1,70 @@
+<div class="main">
+
+  <form action="" method="POST" class="form" id="form-1" [formGroup]="userForm">
+    <h3 class="heading">Taọ tài khoản</h3>
+    <div class="spacer"></div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="fullname" class="form-label">Tên đăng nhập</label>
+        <input id="fullname" name="fullname" type="text" placeholder="VD: Sơn Đặng" class="form-control"
+          formControlName="userName" (blur)="logKeyValuePairs()">
+        <span *ngIf="formErrors.userName" class="form-message" style="color: red">
+          {{ formErrors.userName}}</span>
+      </div>
+
+      <div class="form-group col-md-8">
+        <label for="email" class="form-label">Email</label>
+        <input type="text" placeholder="VD: email@domain.com" class="form-control"
+          formControlName="email" (blur)="logKeyValuePairs()">
+        <span *ngIf="formErrors.email" class="form-message" style="color: red;">
+          {{ formErrors.email }}</span>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <label for="password_confirmation" class="form-label">Quyền</label>
+      <select appSelectValidator formControlName="role" class="custom-select mr-sm-2" id="inlineFormCustomSelect"
+        value='-1' (blur)="logKeyValuePairs()" style="margin-bottom: 0;">
+        <option [value]='-1' selected>Choose...</option>
+        <option *ngFor="let role of listRole" [value]="role.name">{{role.name}}
+        </option>
+      </select>
+    </div>
+    <div formGroupName="passwordGroup">
+      <div class="form-group">
+        <label for="password" class="form-label">Mật khẩu</label>
+        <input id="password" name="password" type="password" placeholder="Nhập mật khẩu" class="form-control"
+          formControlName="passWord" (blur)="logKeyValuePairs()">
+        <span style="color: red;" *ngIf="formErrors.passWord" class="form-message">
+          {{ formErrors.passWord }}</span>
+      </div>
+
+      <div class="form-group">
+        <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
+        <input id="password_confirmation" name="password_confirmation" placeholder="Nhập lại mật khẩu" type="password"
+          class="form-control" formControlName="confirmPassword" (blur)="logKeyValuePairs()">
+        <span style="text-align: left; color: red;" *ngIf="formErrors.confirmPassword || formErrors.passwordGroup">
+          <span class="form-message">{{ formErrors.confirmPassword }}
+            {{ formErrors.passwordGroup }}
+          </span>
+        </span>
+      </div>
+
+
+    </div>
+
+
+
+
+    <button class="form-submit btn btn-primary" (click)="onSubmit()">Đăng ký</button>
+
+    <span style="text-align: left; color: red" class="form-message" *ngIf="isSignUpFailed">
+      {{ this.errorMessage}}
+    </span>
+
+    <div class="alert alert-success" *ngIf="isSuccessful">
+      Bạn đã đăng kí tài khoản thành công
+    </div>
+  </form>
+</div>

@@ -16,6 +16,8 @@
         <i class="fas fa-table"></i>
        Thông tin khách hàng</div>
       <div class="card-body">
+
+        <a type="button" class="btn btn-warning" (click) = "openDialogCategory()"  >Thêm tài khoản mới</a>
         <div class="table-responsive">
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
@@ -26,6 +28,9 @@
                 <th>Địa chỉ</th>
                 <th>Số điện thoại</th>
                 <th>Ngày tạo tài khoản</th>
+                <th>Role</th>
+                <th>Hành động</th>
+              
               </tr>
             </thead>
             <tbody>
@@ -35,7 +40,12 @@
                   <th>{{item.email}}</th>
                   <th>{{item.address}}</th>
                   <th>{{item.phone}}</th>
-                  <th>{{item.createdDate}}</th>
+                  <th>{{item.createdDate | date: 'dd/MM/yyyy'}}</th>
+                  <th>{{item.roles[0].name}}</th>
+                  <th><button>Cập nhật</button>
+                      <button>Xóa</button>
+                  </th>
+                 
               </tr>
             </tbody>
           </table>

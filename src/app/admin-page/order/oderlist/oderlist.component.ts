@@ -15,10 +15,16 @@ export class OderlistComponent implements OnInit {
   alertDeleteDialog: AlertComponent;
   currentItem = ' Bạn không được phép xóa';
   listOrder: any;
+
+ 
+  currentSelectedPage: number = 0;
+  totalPages: number = 0;
+  pageIndexes: Array<number> = [];
+  page: number = 0;
   constructor(public dialog: MatDialog,private productService: ProductService) { }
   ngOnInit(): void {
-    this.getListSanPham();
-    console.log("Đâ");
+    this.getPage();
+   
   }
 
   getListSanPham() {
@@ -34,7 +40,9 @@ export class OderlistComponent implements OnInit {
       panelClass: 'custom-modalbox',
       autoFocus: false,
       data: {
-        data: item,
+        chitiet: item.listOderDetail,
+        idOrder: item.id,
+        
       },
     });
   }
@@ -47,12 +55,71 @@ export class OderlistComponent implements OnInit {
         if(res == true) {
           this.getListSanPham();
         }
-       
       });
-
     }
-
   }
+
+
+  getPaginationWithIndex(index) {
+  
+    this.page = index;
+    this.productService.getPageOder(this.page).subscribe((res) => {
+      if (res === null) {
+        this.listOrder = null;
+      } else {
+        this.listOrder = res.content;
+        this.totalPages = res.totalPages;
+        this.pageIndexes = Array(this.totalPages)
+          .fill(0)
+          .map((x, i) => i);
+        this.currentSelectedPage = res.pageable.pageNumber;
+      }
+    });
+  }
+
+  active(index: number) {
+    if (this.currentSelectedPage == index) {
+      return {
+        active: true,
+      };
+    } else {
+      return { active: false };
+    }
+  }
+
+  nextClick() {
+    alert(this.currentSelectedPage)
+    if (this.currentSelectedPage < this.totalPages - 1) {
+      this.page = this.page + 1;
+      this.getPage();
+    }
+  }
+
+  previousClick() {
+    alert(this.currentSelectedPage)
+    if (this.currentSelectedPage > 0) {
+      this.page = this.page - 1;
+      this.getPage();
+      window.location.reload();
+    }
+  }
+  getPage() {
+   
+    this.productService.getPageOder(this.page).subscribe((res) => {
+      if (res === null) {
+        this.listOrder = null;
+      } else {
+        this.listOrder = res.content;
+        this.totalPages = res.totalPages;
+        this.pageIndexes = Array(this.totalPages)
+          .fill(0)
+          .map((x, i) => i);
+        this.currentSelectedPage = res.pageable.pageNumber;
+      }
+    });
+  }
+
+
 
  updateStatus(id,status) {
    let  updatestatus = {

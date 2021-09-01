@@ -132,21 +132,20 @@ export class ProductAdminComponent implements OnInit {
 
 
   async checkXoa() {
-    this.productService.checkIdProduct(this.id).subscribe(value => {
-      if (value > 0) {
-        this.currentItem = "Bạn không thể xóa";
-        this.confirmDeleteDialog.close();
-        this.alertDeleteDialog.show();
-        return;
-      }
-    })
-    let listid = [];
-    listid.push(this.id);
-    await this.productService.deleteById(listid).toPromise();
-    this.getPage();
-    this.alertDeleteDialog.show();
-    this.currentItem = "Xoa thanh công";
-    this.confirmDeleteDialog.close();
+   
+   this.productService.deleteById(this.id).subscribe(res => {
+     if(res == true) {
+      this.getPage();
+      this.alertDeleteDialog.show();
+      this.currentItem = "Xoa thành  công";
+      this.confirmDeleteDialog.close();
+     } else {
+      this.alertDeleteDialog.show();
+      this.currentItem = "Bạn không thể xóa vì nó có chi tiết sản phẩm";
+      this.confirmDeleteDialog.close();
+     }
+   });
+  
   }
 
 

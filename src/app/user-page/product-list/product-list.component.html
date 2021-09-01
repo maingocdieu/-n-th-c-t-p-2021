@@ -10,7 +10,7 @@
 <div class="featured-product product">
   <div class="container-fluid">
       <div class="section-header">
-          <h1> Những sản phẩm thuộc thể loại {{listProduct.content[0].category.name}}</h1>
+          <h1> {{listProduct.content[0].category.name}}</h1>
       </div>
       <div class="row align-items-center product-slider product-slider-4">
           <div class="col-lg-3" *ngFor = "let item of listProduct.content" style="margin-top: 20px;" >
@@ -36,8 +36,8 @@
                       </div>
                   </div>
                   <div class="product-price">
-                      <h3><span>$</span>99</h3>
-                      <!-- <a class="btn"(click) = "addToCart(item)"><i class="fa fa-shopping-cart"></i>Mua ngay</a> -->
+                      <h3><span></span>{{item.giaBanRa}}</h3>
+                     
                   </div>
               </div>
           </div>

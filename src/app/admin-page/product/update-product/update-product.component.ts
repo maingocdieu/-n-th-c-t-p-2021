@@ -23,15 +23,12 @@ export class UpdateProductComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private productService: ProductService,
     private sizeService: SizeService, private colorService: ColorService,
     private supplierService: SupplierService, private productDetailService: ProductDetailService,
-    
     @Inject(MAT_DIALOG_DATA) public data: any,public dialogRef: MatDialogRef<UpdateProductComponent>) { }
 
   async ngOnInit() {
     
     console.log(this.data)
     if(this.data.data === null) {
-
-      console.log(this.data.id)
       this.productDetailForm = this.formBuilder.group({
         colorId: ['-1', [electionValidate]],
         sizeId: ['-1', [electionValidate]],
@@ -40,10 +37,11 @@ export class UpdateProductComponent implements OnInit {
         price: ['', [Validators.required, Validators.min(0)]]
       });
     } else {
+      console.log(this.data.data.id);
       this.productDetailForm = this.formBuilder.group({
       colorId: [this.data.data.color.id, [electionValidate]],
       sizeId: [this.data.data.size.id, [electionValidate]],
-      productId: [this.data.data.id, [electionValidate]],
+      productId: [this.data.idProdut, [electionValidate]],
       supllierId: [this.data.data.supplier.id, [electionValidate]],
       price: [this.data.data.price, [Validators.required, Validators.min(0)]]
       });

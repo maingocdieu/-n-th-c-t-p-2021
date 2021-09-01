@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { UserService } from 'src/app/_services/user.service';
+import { CreateUserComponent } from '../create-user/create-user.component';
 
 @Component({
   selector: 'app-uer-admin',
@@ -16,9 +18,11 @@ export class UerAdminComponent implements OnInit {
     pageSize: 0,
     page: 0,
   };
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, public dialog: MatDialog) { }
   ngOnInit(): void {
     this.getPage();
+
+    console.log(this.listUser)
   }
 
   getPaginationWithIndex(index) {
@@ -77,4 +81,15 @@ export class UerAdminComponent implements OnInit {
     });
   }
   
+  openDialogCategory() {
+    return this.dialog.open(CreateUserComponent, {
+  
+      panelClass: 'custom-modalbox',
+      autoFocus: false,
+      data: {
+        data: 1,
+      },
+    });
+  }
+
 }

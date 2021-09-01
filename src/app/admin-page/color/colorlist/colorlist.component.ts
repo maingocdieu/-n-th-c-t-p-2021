@@ -90,7 +90,7 @@ export class ColorlistComponent implements OnInit {
   deleteColor(): void {
     this.colorService.deleteColor(this.id).subscribe(res => {
       if(res == true) {
-          this.colors();
+          this.readColor();
       } else {
         this.currentItem = "Bạn không thể xóa"
         this.alertDeleteDialog.show();

@@ -16,9 +16,8 @@
     <tr >
       <td>
         <div class="form-group">
-          <select   appSelectValidator formControlName="productId" class="custom-select mr-sm-2" id="inlineFormCustomSelect" value = '-1'
+          <select   appSelectValidator formControlName="productId" class="custom-select mr-sm-2" id="inlineFormCustomSelect" 
             style="margin-bottom: 0;">
-           
             <option [disabled]  = "true" *ngFor="let product of listProduct" [value]="product.id">{{product.nameProduct}}
             </option>
           </select>

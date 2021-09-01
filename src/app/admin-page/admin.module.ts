@@ -29,7 +29,7 @@ import { OrderDetailComponent } from './order/order-detail/order-detail.componen
 import { ListphieunhapComponent } from './phieunhap/listphieunhap/listphieunhap.component';
 import { ChitietphieunhapComponent } from './phieunhap/chitietphieunhap/chitietphieunhap.component';
 import { UpdatePNComponent } from './phieunhap/update-pn/update-pn.component';
-import { UerAdminComponent } from './uer-admin/uer-admin.component';
+
 import { ColorlistComponent } from './color/colorlist/colorlist.component';
 import { ColordialogComponent } from './color/colordialog/colordialog.component';
 import { SizedialogComponent } from './size/sizedialog/sizedialog.component';
@@ -39,6 +39,8 @@ import { SupplierDialogComponent } from './supplier/supplier-dialog/supplier-dia
 import { InsertProductDetailComponent } from './product/insert-product-detail/insert-product-detail.component';
 import { ProductdetailComponent } from './product/productdetail/productdetail.component';
 import { UpdateProductComponent } from './product/update-product/update-product.component';
+import { CreateUserComponent } from './user/create-user/create-user.component';
+import { UerAdminComponent } from './user/uer-admin/uer-admin.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +69,7 @@ import { UpdateProductComponent } from './product/update-product/update-product.
     SupplierDialogComponent,
     InsertProductDetailComponent,
     UpdateProductComponent,
+    CreateUserComponent,
   
   ],
   imports: [

@@ -11,7 +11,7 @@
     <div class="card mb-3">
       <div class="card-header">
         <i class="fas fa-table"></i>
-              Danh sách đơn đặt hàng</div>
+              Danh sách phiếu nhập</div>
       <div class="card-body">
         <div class="table-responsive">
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -26,7 +26,7 @@
             <tbody>
               <tr *ngFor = " let item of listPhieuNhap">
                 <th>{{item.id}}</th>
-                <th>{{item.dateWrite}}</th>
+                <th>{{item.dateWrite |  date: 'dd/MM/yyyy'}}</th>
                 <th>{{item.user.username}}</th>
                 <th>
                   <i class="fas fa-backspace" style="color: darkgreen; font-size:x-large;margin-left: 40px;" (click)= "xoaPhieuNhap(item)"></i>
@@ -35,6 +35,17 @@
             </tbody>
           </table>
         </div>
+
+         <ul class="pagination justify-content-lg-end" style="margin-right: 15px;
+    margin-bottom: 20px;">
+      <li class="page-item"><a  class="page-link" (click) ="previousClick()">Previous</a></li>
+      <li *ngFor='let index of pageIndexes' class="page-item" [ngClass]="active(index)" >
+              <a  class="page-link" (click)="getPaginationWithIndex(index)">
+                {{index + 1}}
+              </a>
+      </li>
+      <li class="page-item"><a  class="page-link" (click)= "nextClick()">Next</a></li>
+    </ul>
       </div>
    
     </div>
@@ -45,13 +56,7 @@
   <!-- /.container-fluid -->
 
   <!-- Sticky Footer -->
-  <footer class="sticky-footer">
-    <div class="container my-auto">
-      <div class="copyright text-center my-auto">
-        <span>Copyright © Your Website 2019</span>
-      </div>
-    </div>
-  </footer>
+ 
 
 </div>
 

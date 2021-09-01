@@ -1,4 +1,4 @@
-<div id="content-wrapper" >
+<div id="content-wrapper">
 
   <div class="container-fluid">
 
@@ -11,17 +11,20 @@
     </ol>
 
     <!-- DataTables Example -->
-    <div class="card mb-3" *ngIf = "this.product">
+    <div class="card mb-3" *ngIf="this.product">
       <div class="card-header">
         <i class="fas fa-table"></i>
-        Chi tiết sản phẩm {{this.product?.nameProduct}} </div>
+        Chi tiết sản phẩm {{this.product?.nameProduct}}
+      </div>
       <div class="card-body">
         <div class="table-responsive">
 
-          <button type="button" class="btn btn-primary" (click) ="UpdateProdcutDettail(null, this.product.id)">Thêm chi tiết</button>
-          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
+          <button type="button" class="btn btn-primary" (click)="UpdateProdcutDettail(null, this.product.id, null)">Thêm chi
+            tiết</button>
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
               <tr>
+                <th style="width: 200px;">Mã  chi tiết sản phẩm</th>
                 <th style="width: 200px;">Tên sản phẩm</th>
                 <th style="width: 200px;">Hình ảnh</th>
                 <th style="width: 150px;">Màu sắc</th>
@@ -29,31 +32,33 @@
                 <th style="width: 150px;">Hãng sản xuất</th>
                 <th style="width: 150px;">Số lượng tồn</th>
                 <th style="width: 150px;">Giá cả</th>
-                <th style="width: 150px;">Hành động</th>
+                <th style="width: 250px;">Hành động</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let item of this.product.productDetail">
+                <th>{{item.id}}</th>
                 <th>{{this.product.nameProduct}}</th>
-                <th><img src="http://localhost:8080/uploads/{{product.nameImage}}" style="width: 50px; height: 100%;" alt=""></th>
+                <th><img src="http://localhost:8080/uploads/{{product.nameImage}}" style="width: 50px; height: 100%;"
+                    alt=""></th>
                 <th>{{item.color.nameColor}}</th>
                 <th>{{item.size.namesize}}</th>
                 <th>{{item.supplier.nameSupplier}}</th>
                 <th>{{item.soLuong}}</th>
                 <th>{{item.price}}</th>
-                <th><i class="far fa-edit" style="color: darkgreen; font-size:x-large;" (click)= "UpdateProdcutDettail(item, item.id)"></i>
-                  <i class="fas fa-backspace" style="color: darkgreen; font-size:x-large;margin-left: 40px;"></i>
+                <th><i class="far fa-edit" style="color: darkgreen; font-size:x-large;"
+                    (click)="UpdateProdcutDettail(item, this.product.id, item.id)"></i>
+                  <i class="fas fa-backspace" style="color: darkgreen; font-size:x-large;margin-left: 40px;"
+                    (click)="deleteDetail(item.id)"></i>
                 </th>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
-   
+
     </div>
-
-    
-
   </div>
-
 </div>
+
+<app-alert #alertDeleteDialog [item]="currentItem"></app-alert>

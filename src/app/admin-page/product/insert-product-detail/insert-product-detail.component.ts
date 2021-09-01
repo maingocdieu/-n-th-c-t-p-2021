@@ -102,7 +102,8 @@ export class InsertProductDetailComponent implements OnInit {
     this.isValidFormSubmitted = true;
     this.items = this.productDetailForm.value.productDetail;
 
-    console.log(this.items);
+
+  
     
     this.productDetailService.createProductDetail(JSON.stringify(this.items)).subscribe((data) => {
       

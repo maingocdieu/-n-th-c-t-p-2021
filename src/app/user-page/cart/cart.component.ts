@@ -25,6 +25,8 @@ export class CartComponent implements OnInit {
   }
   listCartDetails() {
     this.cartItems = this.cartService.cartItems;
+
+    console.log(this.cartItems);
     let temp = this.cartService.getTotal();
     this.totalPrice = temp.totalPrice;
     this.totalQuantity = temp.totalQuantity;

@@ -10,12 +10,14 @@ import { AddGoodsNoteComponent } from './add-goods-note/add-goods-note.component
 import { AddCategoryComponent } from './category/add-category/add-category.component';
 import { OderlistComponent } from './order/oderlist/oderlist.component';
 import { ListphieunhapComponent } from './phieunhap/listphieunhap/listphieunhap.component';
-import { UerAdminComponent } from './uer-admin/uer-admin.component';
+
 import { ColorlistComponent } from './color/colorlist/colorlist.component';
 import { ListSizeComponent } from './size/list-size/list-size.component';
 import { ListSupplierComponent } from './supplier/list-supplier/list-supplier.component';
 import { ProductDetailComponent } from '../user-page/product-detail/product-detail.component';
 import { InsertProductDetailComponent } from './product/insert-product-detail/insert-product-detail.component';
+import { UerAdminComponent } from './user/uer-admin/uer-admin.component';
+import { CreateUserComponent } from './user/create-user/create-user.component';
 
 
 const AdminRoutes: Routes = [
@@ -79,6 +81,10 @@ const AdminRoutes: Routes = [
       {
         path: 'productdetail',
         component: InsertProductDetailComponent
+      },
+      {
+        path: 'user/dangkitaikhoan',
+        component: CreateUserComponent
       }
     ]
   },

@@ -20,34 +20,13 @@
                         <img class="customImg" src="http://localhost:8080/uploads/{{product.nameImage}}" alt="Product Image">
                       </div>
                       <div class="col-md-7">
-                          <!-- <div class="product-content" *ngIf = 'product' >
-                              <div class="title"><h2>{{product.nameProduct}}</h2></div>
-                              <div class="ratting">
-                                  <i class="fa fa-star"></i>
-                                  <i class="fa fa-star"></i>
-                                  <i class="fa fa-star"></i>
-                                  <i class="fa fa-star"></i>
-                                  <i class="fa fa-star"></i>
-                              </div>
-                              <div class="price">
-                                  <h4>Giá:</h4>
-                                  <p>{{product.giaBanRa | currency: "VND"}}</p>
-                                    <br>
-                                  <h4>Tình trạng:</h4>
-                                  <p *ngIf= "product.soLuong > 0" style="font-size: 1.2rem">Còn hàng</p>
-                                  <p *ngIf= "product.soLuong == 0" style="font-size: 1.2rem;">Hết hàng</p>
-                              </div>
-                              <div class="action">
-                                <button type="button" class="btn btn-warning" (click) = "addToCart(product)">Thêm vào giỏ hàng</button>
-                              </div>
-                          </div> -->
                           <div class="title"><h2>Tên sản phẩm:  {{product.nameProduct}}</h2></div>
                           <table class="table" *ngIf = 'product'>
                            
                             <thead>
                               <tr>
                              
-                                <th scope="col">Chi tiet</th>
+                                <th scope="col">Chi tiết</th>
                                 <th scope="col">Số lượng tồn</th>
                                 <th scope="col">Giá</th>
                                 <th scope="col"></th>
@@ -55,7 +34,7 @@
                             </thead>
                             <tbody>
                               <tr *ngFor = "let item of product.productDetail">
-                                <td>Màu :{{item.color.nameColor}}, Kích thước: {{item.size.namesize}}, Hãng{{item.supplier.nameSupplier}}</td>
+                                <td style="font-weight: bold;">Màu :{{item.color.nameColor}}, Kích thước: {{item.size.namesize}}, Hãng{{item.supplier.nameSupplier}}</td>
                                 <td>{{item.soLuong}}</td>
                                 <td>{{item.price | currency: "VND" }}</td>
                                 <td><button type="button" class="btn btn-warning" (click) = "addToCart(item, product)">Thêm vào giỏ hàng</button></td>
@@ -134,7 +113,7 @@
 
                   <div class="row align-items-center product-slider product-slider-3">
                       <div class="col-lg-3" *ngFor = "let item of products">
-                          <div class="product-item">
+                          <div class="product-item" (click) = "getDetailProduct(item.id)">
                               <div class="product-title">
                                   <a href="#">{{item.nameProduct}}</a>
                                   <div class="ratting">
@@ -149,11 +128,7 @@
                                   <a>
                                       <img class="customImg" style="height: 300px"  src="http://localhost:8080/uploads/{{item.nameImage}}" alt="Product Image">
                                   </a>
-                                  <div class="product-action">
-                                      <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                      <a href="#"><i class="fa fa-heart"></i></a>
-                                      <a href="#"><i class="fa fa-search"></i></a>
-                                  </div>
+                            
                               </div>
                               <div class="product-price">
                                   <h3><span></span>{{item.giaBanRa| currency: "VND" }}</h3>

@@ -25,7 +25,7 @@ export class SizedialogComponent implements OnInit {
 
     if (data.data == null) {
       this.size.nameSize = '';
-      this.buttonName = 'Thêm màu sắc';
+      this.buttonName = 'Thêm kích thước';
     } else {
       this.size.id = data.data.id;
       this.size.nameSize = data.data.namesize;
