@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CustomalertComponent } from 'src/app/common/customalert/customalert.component';
 import { CartItem } from 'src/app/model/cart-item';
 import { CartService } from 'src/app/_services/cart.service';
+import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
 @Component({
   selector: 'app-cart',
@@ -18,7 +19,7 @@ export class CartComponent implements OnInit {
   @ViewChild('alertDeleteDialog', { static: false })
   alertDeleteDialog: CustomalertComponent;
   currentItem = ' Bạn không được phép xóa';
-  constructor(private cartService: CartService, private router : Router) { }
+  constructor(private cartService: CartService, private router : Router, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
     this.listCartDetails();
@@ -66,6 +67,22 @@ export class CartComponent implements OnInit {
   }
 
   checkout() {
+    if (this.tokenStorage.getUser()?.id === undefined) {
+      this.currentItem = "Bạn cần đăng nhập trước khi mua hàng";
+      this.alertDeleteDialog.show();
+      return;
+    }
+
+    if (this.cartService.cartItems.length == 0) {
+      this.currentItem = "Giỏ hàng trống"
+      this.alertDeleteDialog.show();
+      return;
+
+    }
     this.router.navigateByUrl("checkout");
+}
+
+tieptuc() {
+  this.router.navigateByUrl('');
 }
 }

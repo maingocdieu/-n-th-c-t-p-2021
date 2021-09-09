@@ -31,14 +31,11 @@
                           <img class="customImg" style="height: 400px" src="http://localhost:8080/uploads/{{item.nameImage}}" alt="Product Image">
                       </a>
                       <div class="product-action">
-                          <a href="#"><i class="fa fa-cart-plus"></i></a>
-                          <a href="#"><i class="fa fa-heart"></i></a>
-                          <a ><i class="fa fa-search" (click) ="getDetailProduct(item.id)"></i></a>
+                          <a ><i class="fa fa-search" (click) ="getDetailProduct(item)"></i></a>
                       </div>
                   </div>
                   <div class="product-price">
-                      <h3><span>$</span>{{item.giaBanRa}}</h3>
-                      <!-- <button class="btn" href="" (click)="addToCart(item)"><i class="fa fa--shopping-cart"></i>Buy Now</button> -->
+                      <h3><span>$</span>{{item.productDetail[0].price}}</h3>
                   </div>
               </div>
           </div>

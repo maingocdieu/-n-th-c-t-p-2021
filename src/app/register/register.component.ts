@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
 
 @Component({
@@ -9,12 +10,10 @@ import { AuthService } from '../_services/auth.service';
 })
 export class RegisterComponent implements OnInit {
 
- 
+  
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
-
-
 
   userForm: FormGroup;
   formErrors = {
@@ -24,7 +23,6 @@ export class RegisterComponent implements OnInit {
     passwordGroup: '',
     email: '',
   };
-
 
   validationMessages = {
     userName: {
@@ -55,7 +53,7 @@ signUprequest = {
     role:["user"]
   }
 
-  constructor(private authService: AuthService, private formBuilder: FormBuilder) { }
+  constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.userForm = this.formBuilder.group({
@@ -72,11 +70,9 @@ signUprequest = {
   }
 
   onSubmit(): void {
-
     if(this.userForm.invalid) {
       this.userForm.markAllAsTouched();
       this.logKeyValuePairs(this.userForm);
-      
      }
 
      else {
@@ -89,6 +85,9 @@ signUprequest = {
         data => {
           this.isSuccessful = true;
           this.isSignUpFailed = false;
+          alert("Bạn đã đăng kí thành công, nhấn OK để đăng nhập");
+          this.router.navigateByUrl("login");
+
         },
         err => {
           this.errorMessage = err.error.message;

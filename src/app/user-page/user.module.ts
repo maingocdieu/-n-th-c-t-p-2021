@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserPageRoutingModule } from './user-page.routing.module';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
@@ -17,6 +17,11 @@ import { CustomalertComponent } from '../common/customalert/customalert.componen
 import { SearchComponent } from './search/search.component';
 import { ProductSearchComponent } from './product-search/product-search.component';
 import { UpdateAcountComponent } from './update-acount/update-acount.component';
+import { OrdersComponent } from './orders/orders.component';
+import { Ng2OrderModule } from 'ng2-order-pipe';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ChitietdonhangComponent } from './chitietdonhang/chitietdonhang.component';
 
 
 
@@ -36,11 +41,17 @@ import { UpdateAcountComponent } from './update-acount/update-acount.component';
     SearchComponent,   
     ProductSearchComponent,
     UpdateAcountComponent,
+    OrdersComponent,
+    ChitietdonhangComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    UserPageRoutingModule
+    UserPageRoutingModule,
+    Ng2OrderModule,
+    Ng2SearchPipeModule,
+    MatDialogModule,
+    FormsModule
   ]
 })
 export class UserModule { }

@@ -17,29 +17,33 @@
        Danh sách đơn đặt hàng</div>
       <div class="card-body">
         <div class="table-responsive">
+          <div class="navbar" *ngIf ="listOrder">
+           
+            
+          </div>
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
               <tr>
-                <th>Mã</th>
+                <th (click) = "sort('name')">Mã&nbsp; <i class="fa fa-sort"></i></th>
                 <th>Họ tên khách hàng</th>
-                <th>Số điện thoại khách hàng</th>
-                <th>Dia chi</th>
-                <th>Ngày tạo đơn hàng </th>
-                <th>Tổng giá</th>
+                <th>Số điện thoại </th>
+                <th>Địa chỉ</th>
+                <th >Ngày tạo đơn hàng </th>
+                <th>Tổng đơn hàng</th>
                 <th>Trạng thái đơn hàng</th>
                 <th style="width: 200px;">Hành đông</th>
-                <th>Duyệt đơn hàng</th>
+                <th>Duyệt đơn hàng  <input type="checkbox"  [(ngModel)] = "name" (change) = "search(name)"></th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of listOrder">
+              <tr *ngFor="let item of listOrder | orderBy: key: reverse | paginate: {itemsPerPage: 3, currentPage: p};">
                 <th>{{item.id}}</th>
-                <th>{{item.createdBy}}</th>
+                <th>{{item.user.fullName}}</th>
                 <th>{{item.sdt}}</th>
                 <th>{{item.diaChi}}</th>
-                <th>{{item.createdDate|   date: 'dd/MM/yyyy'}}</th>
+                <th >{{item.createdDate|   date: 'dd/MM/yyyy, h:mm:ss'}}</th>
                 <th>{{item.totalPrice}}</th>
-                <th>
+                <th *ngIf ="item.status!=null">
                   <span *ngIf = "item.status else elseBlock">
                       Đang giao
                   </span>
@@ -47,9 +51,13 @@
                       Chưa giao
                   </ng-template>
                 </th>
+
+                <th *ngIf ="item.status==null">
+                   Đã hủy
+                </th>
                 <th><i class="far fa-edit" style="color: darkgreen; font-size:x-large;" (click) ="openDialogCategory(item)" ></i>
                   <i class="fas fa-backspace" style="color: darkgreen; font-size:x-large;margin-left: 40px;" (click) = "deleteOrderList(item)" ></i></th>
-                  <th><button *ngIf = "item.status else else1Block" type="button" class="btn btn-primary" style="width: 150px;" (click)= "updateStatus(item.id,item.status)">Dã duyệt</button>
+                  <th *ngIf ="item.status!=null" ><button *ngIf = "item.status else else1Block" type="button" class="btn btn-primary" style="width: 150px;" (click)= "updateStatus(item.id,item.status)">Dã duyệt</button>
                     <ng-template #else1Block>
                       <button type="button" class="btn btn-danger" style="width: 150px;" (click)= "updateStatus(item.id,item.status)">Chưa duyệt</button>
                     </ng-template>
@@ -57,9 +65,10 @@
               </tr>
             </tbody>
           </table>
+          <pagination-controls (pageChange) = "p = $event"></pagination-controls>
         </div>
 
-        <ul class="pagination justify-content-lg-end" style="margin-right: 15px;
+        <!-- <ul class="pagination justify-content-lg-end" style="margin-right: 15px;
         margin-bottom: 20px;">
           <li class="page-item"><a  class="page-link" (click) ="previousClick()">Previous</a></li>
           <li *ngFor='let index of pageIndexes' class="page-item" [ngClass]="active(index)" >
@@ -68,7 +77,7 @@
                   </a>
           </li>
           <li class="page-item"><a  class="page-link" (click)= "nextClick()">Next</a></li>
-        </ul>
+        </ul> -->
       </div>
    
     </div>

@@ -10,7 +10,8 @@ import { TokenStorageService } from 'src/app/_services/token-storage.service';
 @Component({
   selector: 'app-add-goods-note',
   templateUrl: './add-goods-note.component.html',
-  styleUrls: ['./add-goods-note.component.css']
+  styleUrls: ['./add-goods-note.component.css'],
+  
 })
 export class AddGoodsNoteComponent implements OnInit {
 

@@ -25,7 +25,7 @@ export class CartService {
     let temp = { totalPrice: 0, totalQuantity: 0 };
     for (let i = 0; i < this.cartItems.length; i++) {
       const elm = this.cartItems[i];
-      temp.totalPrice += elm.giaBanRa;
+      temp.totalPrice += elm.giaBanRa*elm.quantity;
       temp.totalQuantity += elm.quantity;
     }
     return temp;
@@ -60,10 +60,8 @@ export class CartService {
   }
 
   computeCartTotals() {
-
     let totalPriceValue: number = 0;
     let totalQuantityValue: number = 0;
-
     for (let currentCartItem of this.cartItems) {
       totalPriceValue += currentCartItem.quantity * currentCartItem.giaBanRa;
       totalQuantityValue += currentCartItem.quantity;
@@ -72,11 +70,7 @@ export class CartService {
     // publish the new values ... all subscribers will receive the new data
     this.totalPrice.next(totalPriceValue);
     this.totalQuantity.next(totalQuantityValue);
-    // this.CartInfo.next({
-    //   totalQuantity: totalQuantityValue,
-    //   totalPrice: totalPriceValue
-    // });
-    // log cart data just for debugging purposes
+   
     this.logCartData(totalPriceValue, totalQuantityValue);
   }
 

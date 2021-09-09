@@ -46,19 +46,16 @@ export class AddProductComponent implements OnInit {
   };
   validationMessages = {
     productName: {
-      required: 'Product Name is required.',
+      required: 'Bạn phải nhập tên sản phẩm',
     },
     category: {
-      required: 'Category is required.',
-    },
-    price: {
-      required: 'Price is required.',
+      required: 'Bạn phải chọn danh mục sản phẩm',
     },
     describe: {
-      required: 'Descripe  is required.',
+      required: 'Bạn phải nhập vào mô tả sản phẩm',
     },
     Image: {
-      required: 'file is required',
+      required: 'Bạn phải chọn hình sản phẩm',
     },
   };
 
@@ -90,7 +87,7 @@ export class AddProductComponent implements OnInit {
       this.productForm = this.fb.group({
         productName: ['', [Validators.required]],
         category: ['', [Validators.required]],
-        price: ['', [Validators.required]],
+     
         describe: ['', [Validators.required]],
     
 
@@ -105,7 +102,7 @@ export class AddProductComponent implements OnInit {
       this.productForm = this.fb.group({
         productName: ['', [Validators.required]],
         category: ['', [Validators.required]],
-        price: ['', [Validators.required]],
+       
         describe: ['', [Validators.required]],
         Image: ['', [Validators.required]],
       });
@@ -188,7 +185,7 @@ export class AddProductComponent implements OnInit {
           this.product.base64.toString();
           this.product.nameProduct = this.productForm.get('productName').value;
           this.product.categoryCode = this.productForm.get('category').value;
-          this.product.giaBanRa = this.productForm.get('price').value;
+         
           this.product.describe = this.productForm.get('describe').value;
           this.productService.insertProduct(this.product).subscribe((res) => {
               if(res) {
@@ -206,7 +203,6 @@ export class AddProductComponent implements OnInit {
         if (this.selectedFile == undefined) {
           this.product.base64 = null;
           this.product.nameProduct = this.productForm.get('productName').value;
-          this.product.giaBanRa = this.productForm.get('price').value;
           this.product.categoryCode = this.productForm.get('category').value;
           this.product.describe = this.productForm.get('describe').value;
           this.productService
@@ -225,7 +221,7 @@ export class AddProductComponent implements OnInit {
               'productName'
             ).value;
             this.product.categoryCode = this.productForm.get('category').value;
-            this.product.giaBanRa = this.productForm.get('price').value;
+         
             this.productService
               .updateProduct(this.isCreateOrUpdate, this.product)
               .subscribe(() => {
@@ -238,14 +234,14 @@ export class AddProductComponent implements OnInit {
     }
   }
   back() {
-    this.router.navigateByUrl('product');
+    this.router.navigateByUrl('admin');
   }
 
   showDetaileProduct(id: Number, form: FormGroup) {
     this.productService.getById(id).subscribe((res) => {
       console.log(res);
       form.get('productName').setValue(res.nameProduct);
-      form.get('price').setValue(res.giaBanRa);
+    
       form.get('describe').setValue(res.describe);
       form.get('category').setValue(res.category);
       for (let category of this.categorys) {

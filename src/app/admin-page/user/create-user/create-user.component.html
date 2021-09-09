@@ -48,21 +48,14 @@
           <span class="form-message">{{ formErrors.confirmPassword }}
             {{ formErrors.passwordGroup }}
           </span>
-        </span>
+        </span> 
       </div>
-
-
     </div>
 
-
-
-
     <button class="form-submit btn btn-primary" (click)="onSubmit()">Đăng ký</button>
-
     <span style="text-align: left; color: red" class="form-message" *ngIf="isSignUpFailed">
       {{ this.errorMessage}}
     </span>
-
     <div class="alert alert-success" *ngIf="isSuccessful">
       Bạn đã đăng kí tài khoản thành công
     </div>

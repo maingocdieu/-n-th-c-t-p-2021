@@ -44,8 +44,12 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  getDetailProduct(id) {
-    this.router.navigateByUrl("product/"+ id)
+  getDetailProduct(item) {
+    if(item.status == false) {
+      alert("Sản phậm đang tạm thời ngừng bán");
+      return;
+    }
+    this.router.navigateByUrl("product/"+ item.id)
   }
 
   // addToCart(theProduct: any) {

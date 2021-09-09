@@ -5,6 +5,7 @@ import { CustomalertComponent } from 'src/app/common/customalert/customalert.com
 import { CartItem } from 'src/app/model/cart-item';
 import { CartService } from 'src/app/_services/cart.service';
 import { ProductService } from 'src/app/_services/product.service';
+import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -22,7 +23,7 @@ export class ProductDetailComponent implements OnInit {
   alertDeleteDialog: CustomalertComponent;
   currentItem = 'Sản phẩm thạm thời hết hàng';
   constructor(private activateRoute: ActivatedRoute, private productService: ProductService,
-    private router: Router, private cartService: CartService) { }
+    private router: Router, public cartService: CartService, private tokenStorage: TokenStorageService) { }
 
   async ngOnInit() {
     await this.getProduct();
@@ -44,12 +45,18 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToCart(itemDetail: any, product: any) {
-    const theCartItem = new CartItem(itemDetail, product);
 
-    // if(theCartItem.quantity >theCartItem.soLuongTon) {
-    //     this.alertDeleteDialog.show();
-    //     return;
-    // }
+    if (this.tokenStorage.getUser()?.id === undefined) {
+      alert("Bạn cần đăng nhập để mua hàng");
+      this.router.navigateByUrl("login");
+      return;
+    }
+    const theCartItem = new CartItem(itemDetail, product);
+    
+    if(theCartItem.quantity >theCartItem.soLuongTon) {
+        this.alertDeleteDialog.show();
+        return;
+    }
     this.cartService.addToCart(theCartItem);
   }
 
@@ -57,9 +64,17 @@ export class ProductDetailComponent implements OnInit {
 
   getDetailProduct(id) {
     this.router.navigateByUrl("product/"+ id);
-window.location.replace("product/"+ id);
+    this.ngOnInit();
+  // window.location.replace("product/"+ id);
   }
 
- 
+  muangay() {
+    this.router.navigateByUrl('/cart');
+  }
 
+  tieptuc() {
+    this.router.navigateByUrl('');
+   
+  }
+  
 }

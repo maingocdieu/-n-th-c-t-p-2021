@@ -20,20 +20,26 @@ export class ProductSearchComponent implements OnInit {
   currentItem = 'Sản phẩm thạm thời hết hàng';
   constructor(private activateRoute: ActivatedRoute , private productService: ProductService, private cartService: CartService, private router: Router) { }
   ngOnInit(): void {
-      this.handleSearchProducts();
+  
+    
+    this.handleSearchProducts();
   }
+
   handleSearchProducts() {
     const theKeyword: string = this.activateRoute.snapshot.paramMap.get('keyword');
     this.productService.searchProducts(theKeyword).subscribe(
       data => {
         this.products = data.content;
-        console.log(this.products);
       }
     )
   }
 
-  getDetailProduct(id) {
-    this.router.navigateByUrl("product/"+ id)
+  getDetailProduct(item) {
+    if(item.status == false) {
+      alert("Sản phậm đang tạm thời ngừng bán");
+      return;
+    }
+    this.router.navigateByUrl("product/"+ item.id)
   }
 
 }

@@ -94,8 +94,21 @@
 
     <div class="dropdown-menu" aria-labelledby="pagesDropdown">
       <a class="dropdown-item" [routerLink] = "['/admin/phieuNhap']" >Danh sách đơn đặt hàng</a>
-      <a class="dropdown-item" href="register.html">Thêm user</a>
+      
     </div>
+  </li>
+
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="fas fa-fw fa-folder"></i>
+      <span>Thống kê</span>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+      <a class="dropdown-item" [routerLink] = "['/admin/thongke']" >Doanh Thu</a>
+      <a class="dropdown-item" [routerLink] = "['/admin/thongkelailo']" >Thống kê lãi lỗ</a>
+    </div>
+
+    
   </li>
 
 

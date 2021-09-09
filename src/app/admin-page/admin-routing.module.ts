@@ -18,6 +18,8 @@ import { ProductDetailComponent } from '../user-page/product-detail/product-deta
 import { InsertProductDetailComponent } from './product/insert-product-detail/insert-product-detail.component';
 import { UerAdminComponent } from './user/uer-admin/uer-admin.component';
 import { CreateUserComponent } from './user/create-user/create-user.component';
+import { ThongkeComponent } from './thongke/thongke.component';
+import { ThonglelailoComponent } from './thonglelailo/thonglelailo.component';
 
 
 const AdminRoutes: Routes = [
@@ -85,6 +87,14 @@ const AdminRoutes: Routes = [
       {
         path: 'user/dangkitaikhoan',
         component: CreateUserComponent
+      },
+      {
+        path: 'thongke',
+        component: ThongkeComponent
+      },
+      {
+        path:'thongkelailo',
+        component: ThonglelailoComponent
       }
     ]
   },

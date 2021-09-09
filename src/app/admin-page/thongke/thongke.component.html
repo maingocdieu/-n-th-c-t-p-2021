@@ -1,0 +1,88 @@
+
+<div class="container-fluid" style="width: 140%;">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a >Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">Thống kê</li>
+  </ol>
+  <!-- DataTables Example -->
+  <div class="card mb-3">
+    <div class="card-header">
+      <i class="fas fa-table"></i>
+        Doanh thu
+    </div>
+
+    <form  [formGroup]="thongKeForm">
+      
+      <div style="margin-left: 20px; display: flex; justify-content: center
+      ;
+      align-items: center;
+      margin-top: 15px;">
+        <h1 style="margin-right: 25px; ">Ngày bắt đầu </h1>
+        <mat-form-field appearance="fill">
+          <mat-label>Ngày bắt đầu</mat-label>
+          <input matInput formControlName="ngayBatDau"  [matDatepicker]="picker">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <label style="color: red;" *ngIf="ngayBatDau.invalid && isValidFormSubmitted != null && !isValidFormSubmitted"
+        class="error">
+        Ngày bắt đàu bắt buộc
+      </label>
+      </div>
+
+      <div style="margin-left: 20px; display: flex; justify-content: center
+      ;
+      align-items: center;
+      margin-top: 15px;">
+        <h1 style="margin-right: 25px; ">Ngày kết thúc </h1>
+        <mat-form-field appearance="fill">
+          <mat-label>Ngày kết thúc</mat-label>
+          <input matInput formControlName="ngayKetThuc"  [matDatepicker]="pickera">
+          <mat-datepicker-toggle matSuffix [for]="pickera"></mat-datepicker-toggle>
+          <mat-datepicker #pickera></mat-datepicker>
+        </mat-form-field>
+        <label style="color: red;" *ngIf="ngayKetThuc.invalid && isValidFormSubmitted != null && !isValidFormSubmitted"
+        class="error">
+        Ngày kết thúc bắt buộc
+      </label>
+      </div>
+     
+      <button type="button" class="btn btn-success" style="margin-left: 50px;" (click) = "onFormSubmit()">Thống kê doanh thu</button>
+    </form>
+    <div class="navbar" *ngIf ="listThongKe">
+      <input type="text" class="form-control" type="text" [(ngModel)] = "name" (ngModelChange) = "search()">
+      <div style="color: red;">Tổng doanh số :{{tongdoanhthu | currency: 'VND'}}</div>
+    </div>
+
+   
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" *ngIf ="listThongKe" >
+     
+      <thead>
+        <tr>
+          <th (click) = "sort('name')">Tên sản phẩm&nbsp; <i class="fa fa-sort"></i></th>
+          <th>Màu sản phẩm</th>
+          <th>Kích thước sản phẩm</th>
+          <th>Hãng sản xuất</th>
+          <th>Tổng số lượng </th>
+          <th> Đơn Giá</th>
+          <th (click) = "sort('name')">Doanh thu&nbsp; <i class="fa fa-sort"></i></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor ="let item of listThongKe | orderBy: key: reverse | paginate: {itemsPerPage: 15, currentPage: p};">
+          <th>{{item.name}}</th>
+          <th>{{item.name_color}}</th>
+          <th>{{item.namesize}}</th>
+          <th>{{item.name_supplier}}</th>
+          <th>{{item.tongSoLuong}}</th>
+          <th>{{item.price | currency: 'VND'}}</th>
+          <th>{{item.price * item.tongSoLuong | currency: 'VND' }}</th>
+        </tr>
+      </tbody>
+      
+      <pagination-controls (pageChange) = "p = $event"></pagination-controls>
+    </table>
+  </div>
+</div>

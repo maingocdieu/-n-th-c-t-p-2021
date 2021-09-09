@@ -12,6 +12,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { ProductSearchComponent } from './product-search/product-search.component';
 import { UpdatePNComponent } from '../admin-page/phieunhap/update-pn/update-pn.component';
 import { UpdateAcountComponent } from './update-acount/update-acount.component';
+import { OrdersComponent } from './orders/orders.component';
 
 
 
@@ -52,6 +53,10 @@ const UserRoutes: Routes = [
       ,{
         path: "update_acount",
         component: UpdateAcountComponent
+      }, 
+      {
+        path: 'oders',
+        component: OrdersComponent
       }
     ]
   },

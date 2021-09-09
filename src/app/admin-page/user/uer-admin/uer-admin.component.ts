@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UserService } from 'src/app/_services/user.service';
 import { CreateUserComponent } from '../create-user/create-user.component';
+import { UpdateuserComponent } from '../updateuser/updateuser.component';
 
 @Component({
   selector: 'app-uer-admin',
@@ -21,8 +22,6 @@ export class UerAdminComponent implements OnInit {
   constructor(private userService: UserService, public dialog: MatDialog) { }
   ngOnInit(): void {
     this.getPage();
-
-    console.log(this.listUser)
   }
 
   getPaginationWithIndex(index) {
@@ -83,13 +82,47 @@ export class UerAdminComponent implements OnInit {
   
   openDialogCategory() {
     return this.dialog.open(CreateUserComponent, {
-  
       panelClass: 'custom-modalbox',
       autoFocus: false,
       data: {
         data: 1,
       },
     });
+  }
+
+
+  openDialogUpdate(id) {
+    return this.dialog.open(UpdateuserComponent, {
+      panelClass: 'custom-modalbox',
+      autoFocus: false,
+      data: {
+        id: id,
+      },
+    });
+  }
+
+  updateUser(id) {
+    this.openDialogUpdate(id).afterClosed().subscribe(res => {
+       if(res !==undefined)
+       {
+        this.userService.updateUserAdmin(id, res).subscribe(res => {
+          this.getPaginationWithIndex(this.user.page);
+         });
+       }
+    })
+
+  }
+
+  delete(id) {
+    this.userService.deleteuser(id).subscribe (res => 
+      {
+        if(res == false ) {
+          alert("Bạn không thể xóa");
+        } else {
+          this.getPaginationWithIndex(this.user.page)
+        }
+      });
+
   }
 
 }

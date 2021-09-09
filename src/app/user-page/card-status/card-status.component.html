@@ -2,10 +2,10 @@
   <div class="user">
       <a  class="btn wishlist">
           <i class="fa fa-heart"></i>
-          <span>{{ totalPrice | currency: 'USD' }}</span>
+          <span>{{ totalPrice | currency: 'VND' }}</span>
       </a>
       <a routerLink="/cart" class="btn cart">
           <i class="fa fa-shopping-cart"></i>
-          <span>{{ totalQuantity }}</span>
+          <span>{{this.cartService.cartItems.length }}</span>
       </a>
   </div>

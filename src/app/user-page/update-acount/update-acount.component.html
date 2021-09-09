@@ -1,15 +1,65 @@
 <div class="my-account" >
   <div class="container-fluid">
       <div class="row">
+        <div class="col-md-3">
+            <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+               
+                <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i class="fa fa-shopping-bag"></i>Danh sách đơn đặt hàng</a>
+                <a class="nav-link active " id="account-tab  " data-toggle="pill" href="#account-tab" role="tab"><i class="fa fa-credit-card"></i>User</a>
+             
+            </div>
+            
+        </div>
          
           <div class="col-md-9" style="margin: auto;">
               <div class="tab-content">
-                 
-                  
-                  <div  aria-labelledby="account-nav">
+                <div class="tab-pane fade" id="orders-tab" role="tabpanel" aria-labelledby="orders-nav">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th (click) = "sort('id')">ID&nbsp; <i class="fa fa-sort"></i></th>
+                                    <th>Ngày tạo</th>
+                                    <th>Số lượng</th>
+                                    <th>Giá trị đơn hàng</th>
+                                    <th>Trạng thái</th>
+                                    <th>Hủy đơn</th>
+                                    <th>Chi tiết đơn hàng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor = "let item of oder | orderBy: key: reverse">
+                                    <td>{{item.id}}</td>
+                                    <td>{{item.createdDate |   date: 'dd/MM/yyyy'}}</td>
+                                    <td>{{item.totalQuantity}}</td>
+                                    <td>{{item.totalPrice}}</td>
+                                    <td *ngIf = "item.status !== null">
+                                        <span *ngIf = "item.status else elseBlock">
+                                        Đang giao
+                                    </span>
+                                    <ng-template #elseBlock>
+                                        Chưa giao
+                                    </ng-template></td>
+
+                                    <td *ngIf = "item.status ==null">
+                                        Đã hủy
+                                    </td>
+                                    <td>
+                                        <button *ngIf = "item.status == false" class="btn btn-danger" (click)  = "HuyDon(item.status, item.id)">Hủy đơn</button>
+                                        <button *ngIf = "item.status == null" class="btn btn-success" (click)  = "HuyDon(item.status, item.id)">Không hủy</button>
+                                    </td>
+                                    <td>
+                                        <!-- <button *ngIf = "item.status != true" class="btn btn-success" (click) = "updateProduct(item)">Cập nhật</button> -->
+                                        <button class="btn btn-success" (click) = "openChiTietDonHang(item)">Chi tiết đơn hàng</button>
+                                    </td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                  <div  class="tab-pane fade show active" id="account-tab" role="tabpanel" aria-labelledby="account-nav">
                       <h4>Thông tin khách hàng</h4>
-
-
                       <form *ngIf = "userForm" class="row" [formGroup]="userForm">
                           <div class="col-md-6" >
                               <input class="form-control" formControlName= "fullName" type="text" placeholder="Họ và tên khách hàng">

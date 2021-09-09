@@ -41,6 +41,12 @@ import { ProductdetailComponent } from './product/productdetail/productdetail.co
 import { UpdateProductComponent } from './product/update-product/update-product.component';
 import { CreateUserComponent } from './user/create-user/create-user.component';
 import { UerAdminComponent } from './user/uer-admin/uer-admin.component';
+import { UpdateuserComponent } from './user/updateuser/updateuser.component';
+import { ThongkeComponent } from './thongke/thongke.component';
+import { Ng2OrderModule } from 'ng2-order-pipe';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ThonglelailoComponent } from './thonglelailo/thonglelailo.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +76,9 @@ import { UerAdminComponent } from './user/uer-admin/uer-admin.component';
     InsertProductDetailComponent,
     UpdateProductComponent,
     CreateUserComponent,
+    UpdateuserComponent,
+    ThongkeComponent,
+    ThonglelailoComponent,
   
   ],
   imports: [
@@ -84,7 +93,10 @@ import { UerAdminComponent } from './user/uer-admin/uer-admin.component';
     AdminRoutingModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatDialogModule
+    MatDialogModule,
+    Ng2OrderModule,
+    Ng2SearchPipeModule,
+    NgxPaginationModule
   ]
 })
 export class AdminModule { }

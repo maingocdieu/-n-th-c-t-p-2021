@@ -29,11 +29,9 @@
                         <a>
                             <img class="customImg" style="height: 300px" src="http://localhost:8080/uploads/{{item.nameImage}}" alt="Product Image">
                         </a>
-                      
                     </div>
                     <div class="product-price">
-                        <h3><span>$</span>{{item.giaBanRa}}</h3>
-    
+                        <h3><span>Giá: </span>{{item.productDetail[0].price | currency: 'VND'}}</h3>
                     </div>
                 </div>
             </div>

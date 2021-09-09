@@ -1,0 +1,61 @@
+<div class="main">
+
+  <form action="" method="POST" class="form" id="form-1" [formGroup]="userForm" *ngIf = "userForm">
+    <h3 class="heading">Cập nhật thông tin user</h3>
+    <div class="spacer"></div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="fullname" class="form-label">Tên UserName</label>
+        <input formControlName="userName" id="fullname" name="fullname" type="text" placeholder="VD: Sơn Đặng"
+          class="form-control">
+
+      </div>
+
+      <div class="form-group col-md-8">
+        <label for="email" class="form-label">Email</label>
+        <input formControlName="email" type="text" placeholder="VD: email@domain.com" class="form-control">
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password_confirmation" class="form-label">Quyền</label>
+      <select appSelectValidator formControlName="role" class="custom-select mr-sm-2" id="inlineFormCustomSelect"
+        style="margin-bottom: 0;">
+
+        <option *ngFor="let role of listRole" [value]="role.name">{{role.name}}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="fullname" class="form-label">Tên đầy đủ</label>
+        <input formControlName="fullName" id="fullname" name="fullname" type="text" placeholder="VD: Sơn Đặng"
+          class="form-control">
+
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="fullname" class="form-label">SDT</label>
+        <input id="fullname" formControlName="phone" name="fullname" type="text" placeholder="VD: 081746596"
+          class="form-control">
+
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="fullname" class="form-label">Địa chi</label>
+        <input id="fullname" formControlName="address" name="fullname" type="text" placeholder="VD: 081746596"
+          class="form-control">
+      </div>
+    </div>
+    <button class="form-submit btn btn-primary" [mat-dialog-close]="userForm.value">Cập nhật</button>
+    <span style="text-align: left; color: red" class="form-message">
+    </span>
+    
+  </form>
+</div>

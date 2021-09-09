@@ -1,0 +1,59 @@
+
+<div class="container-fluid" >
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a >Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">Thống kê</li>
+  </ol>
+  
+  <div class="card mb-3">
+    <div class="card-header">
+      <i class="fas fa-table"></i>
+        Lãi lỗ
+    </div>
+
+    
+    <div class="navbar" *ngIf ="listLaiLo">
+      <input type="text" class="form-control" type="text" [(ngModel)] = "name" (ngModelChange) = "search()">
+      <div style="color: red;">Tổng doanh số : {{tongTongBan-tongTongNhap | currency: 'VND'}}</div>
+    </div>
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" *ngIf ="listLaiLo" >
+     
+      <thead>
+        <tr>
+          <th (click) = "sort('name')">Tên sản phẩm&nbsp; <i class="fa fa-sort"></i></th>
+          <th>Màu sản phẩm</th>
+          <th>Kích thước sản phẩm</th>
+          <th>Hãng sản xuất</th>
+          <th>Số lượng nhập</th>
+          <th>Giá nhập</th>
+          <th>Số lượng Bán</th>
+          <th>Giá bán</th>
+          <th>Tiền nhập</th>
+          <th>Tiền bán</th>
+          <th>SoLuongTồn</th>
+          <th>Lãi lỗ</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor ="let item of listLaiLo | orderBy: key: reverse | paginate: {itemsPerPage: 15, currentPage: p}; ">
+          <th>{{item.name}}</th>
+          <th>{{item.name_color}}</th>
+          <th>{{item.namesize}}</th>
+          <th>{{item.name_supplier}}</th>
+          <th>{{item.soLuongNhap}}</th>
+          <th>{{item.gianhap | currency: 'VND'}}</th>
+          <th>{{item.tongSoLuongBan }}</th>
+          <th >{{item.giaBanRa | currency: 'VND'}}</th>
+          <th>{{item.soLuongNhap* item.gianhap | currency: 'VND'}}</th>
+          <th>{{item.tongSoLuongBan* item.giaBanRa | currency: 'VND' }}</th>
+          <th>{{item.soLuongTon}}</th>
+          <th>{{item.tongSoLuongBan* item.giaBanRa - item.soLuongNhap* item.gianhap | currency: 'VND'}}</th>
+        </tr>
+      </tbody>
+    </table>
+    <pagination-controls (pageChange) = "p = $event"></pagination-controls>
+  </div>
+</div>

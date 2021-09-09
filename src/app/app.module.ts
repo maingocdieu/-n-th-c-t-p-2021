@@ -20,6 +20,8 @@ import { CommonModule } from '@angular/common';
 import { SearchComponent } from './user-page/search/search.component';
 import { ProductSearchComponent } from './user-page/product-search/product-search.component';
 import { UpdateAcountComponent } from './user-page/update-acount/update-acount.component';
+import { OrdersComponent } from './user-page/orders/orders.component';
+import { ChitietdonhangComponent } from './user-page/chitietdonhang/chitietdonhang.component';
 
 
 
@@ -30,8 +32,7 @@ import { UpdateAcountComponent } from './user-page/update-acount/update-acount.c
     LoginComponent,
     RegisterComponent,
     SelectRequiredValidatorDirective,
-   
-   
+  
   ],
   imports: [
     ReactiveFormsModule   ,

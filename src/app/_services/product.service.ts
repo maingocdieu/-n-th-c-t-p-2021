@@ -45,6 +45,9 @@ export class ProductService {
     return this.httpClient.get(baseURL+ '/' + id);
   }
 
+  getProductClientPage(data: any): Observable<any>{
+    return this.httpClient.post( baseURL+"/getPageProductUser",data);
+  }
   getProductPagingList(data: any) : Observable<any>{
     return this.httpClient.post( baseURL+"/getPageProduct",data);
   }
@@ -119,4 +122,26 @@ export class ProductService {
   getPageOder(page):Observable<any> {
     return this.httpClient.get(baseURL + "/getlistOrder/" + page);
   }
+
+  getOrderByUser(id):Observable<any> {
+    return this.httpClient.post(baseURL + "/getOrderByUser", id );
+  }
+
+  cancelOder(id):Observable<any> {
+    return this.httpClient.post(baseURL + "/cancelOrder", id );
+  }
+
+  updateStatusProduct(id): Observable <any> {
+    return this.httpClient.post(baseURL + "/updateStatusProduct", id );
+  }
+
+getThongKe(data):Observable <any> {
+  return this.httpClient.post(baseURL + "/thongke", data );
+}
+
+
+getThongKeLaiLo():Observable <any> {
+  return this.httpClient.get(baseURL + "/thongkelailo" );
+}
+
 }

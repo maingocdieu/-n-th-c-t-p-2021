@@ -14,8 +14,6 @@ export class CreateUserComponent implements OnInit {
   isSignUpFailed = false;
   errorMessage = '';
   listRole: any;
-
-
   userForm: FormGroup;
   formErrors = {
     userName: '',
@@ -25,7 +23,6 @@ export class CreateUserComponent implements OnInit {
     email: '',
     role: ''
   };
-
 
   validationMessages = {
     userName: {

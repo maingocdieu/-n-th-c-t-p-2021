@@ -1,0 +1,61 @@
+<div class="main">
+
+  <form action="" method="POST" class="form" id="form-1" [formGroup]="userForm" *ngIf = "userForm">
+    <h3 class="heading">Thông tin đơn đặt hàng</h3>
+    <div class="spacer"></div>
+    <div class="form-row">
+     
+
+      <div class="form-group col-md-12">
+        <label for="email" class="form-label">Email</label>
+        <input formControlName="email" type="text" placeholder="VD: email@domain.com" class="form-control">
+
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="fullname" class="form-label">Tên đầy đủ</label>
+        <input formControlName="fullName" id="fullname" name="fullname" type="text" placeholder="VD: Sơn Đặng"
+          class="form-control">
+
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="fullname" class="form-label">SDT</label>
+        <input id="fullname" formControlName="phone" name="fullname" type="text" placeholder="VD: 081746596"
+          class="form-control">
+
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="fullname" class="form-label">Địa chi</label>
+        <input id="fullname" formControlName="address" name="fullname" type="text" placeholder="VD: 081746596"
+          class="form-control">
+      </div>
+
+      <div class="col-md-6">
+        <label>Hình thức giao hàng</label>
+        <div class="form-control">
+          <label class="radio-inline" >
+            <input type="radio" name="hinhthucgiaohang"  value="taicuahang" formControlName="hinhthucgiaohang"  >
+            Nhận tại nơi
+          </label>
+          <label class="radio-inline" style="margin-left: 20px;">
+            <input type="radio" name="hinhthucgiaohang" value="giaotannoi"  formControlName = "hinhthucgiaohang">
+          Giao hàng
+          </label>
+        </div>
+
+        
+      </div>
+    </div>
+    <button class="form-submit btn btn-primary" [mat-dialog-close]="userForm.value">Cập nhật</button>
+    <span style="text-align: left; color: red" class="form-message">
+    </span>
+  </form>
+</div>

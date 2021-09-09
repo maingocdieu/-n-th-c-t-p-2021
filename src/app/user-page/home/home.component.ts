@@ -36,13 +36,13 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
     this.getPage();
-  
   }
 
   getPaginationWithIndex(index) {
     this.product.page = index;
-    this.productService.getProductPagingList(this.product).subscribe((res) => {
+    this.productService.getProductClientPage(this.product).subscribe((res) => {
       if (res === null) {
         this.listProduct = null;
       } else {
@@ -81,14 +81,11 @@ export class HomeComponent implements OnInit {
   }
   getPage() {
     var id = parseInt(this.valueRole);
-    this.productService.getProductPagingList(this.product).subscribe((res) => {
+    this.productService.getProductClientPage(this.product).subscribe((res) => {
       if (res === null) {
         this.listProduct = null;
       } else {
         this.listProduct = res.content;
-
-        
-    console.log(this.listProduct)
         this.totalPages = res.totalPages;
         this.pageIndexes = Array(this.totalPages)
           .fill(0)
@@ -102,13 +99,5 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl("product/"+ id)
   }
 
-  // addToCart(theProduct: any) {
-  //   const theCartItem = new CartItem(theProduct);
-  //   if(theCartItem.quantity >theCartItem.soLuongTon) {
-  //       this.alertDeleteDialog.show();
-  //       return;
-  //   }
-  //   this.cartService.addToCart(theCartItem);
-  // }
-
+  
 }

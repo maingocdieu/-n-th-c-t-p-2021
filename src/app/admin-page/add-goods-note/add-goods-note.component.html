@@ -1,7 +1,7 @@
-<div class="container-fluid" style="width: 140%;">
+<div class="container-fluid" >
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
-      <a href="#">Dashboard</a>
+      <a >Dashboard</a>
     </li>
     <li class="breadcrumb-item active">Thêm phiếu nhập</li>
   </ol>
@@ -24,7 +24,6 @@
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
-
         <label style="color: red;" *ngIf="ngayTao.invalid && isValidFormSubmitted != null && !isValidFormSubmitted"
           class="error">
           Ngày nhập bắt buộc
@@ -38,7 +37,7 @@
                 <th>Sản phẩm</th>
                 <th>Giá</th>
                 <th>Số lượng</th>
-                <th>Tổng tiền</th>
+                <th>Thành tiền</th>
                 <th>Xóa</th>
               </tr>
             </thead>
@@ -48,7 +47,7 @@
               <tr *ngFor="let emp of employees.controls; let i = index" [formGroupName]="i">
                 <td>
                   <div class="form-group">
-                    <select appSelectValidator formControlName="productDetailId" class="custom-select mr-sm-2"
+                    <select  appSelectValidator formControlName="productDetailId" class="custom-select mr-sm-2"
                       id="inlineFormCustomSelect" value='-1' style="margin-bottom: 0;">
                       <option [value]='-1' selected>Choose...</option>
                       <option *ngFor="let product of listProduct" [value]="product.id">{{product.product.nameProduct}},
@@ -89,10 +88,9 @@
         </div>
       </div>
       <button type="button" class="btn btn-success ml-sm-4" (click)="onFormSubmit()">Submit</button>
-      <button type="button" class="btn btn-success" style="margin-left: 50px;" (click)="addEmployee()">Thêm phiếu
-        nhập</button>
+      <button type="button" class="btn btn-success" style="margin-left: 50px;" (click)="addEmployee()">Thêm sản phẩm</button>
     </form>
-    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+ 
     <div *ngIf="messageSucess">Thêm thành công</div>
   </div>
 </div>

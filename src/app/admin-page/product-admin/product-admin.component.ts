@@ -115,6 +115,7 @@ export class ProductAdminComponent implements OnInit {
         this.listProduct = null;
       } else {
         this.listProduct = res.content;
+        console.log(this.listProduct)
         this.totalPages = res.totalPages;
         this.pageIndexes = Array(this.totalPages)
           .fill(0)
@@ -124,6 +125,11 @@ export class ProductAdminComponent implements OnInit {
     });
   }
 
+  updateStatus(id) {
+      this.productService.updateStatusProduct(id).subscribe (res => {
+            console.log(res);
+      })
+  }
 
   showConfirmDialog(id) {
     this.confirmDeleteDialog.show();

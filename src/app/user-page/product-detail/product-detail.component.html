@@ -20,12 +20,13 @@
                         <img class="customImg" src="http://localhost:8080/uploads/{{product.nameImage}}" alt="Product Image">
                       </div>
                       <div class="col-md-7">
+                       
                           <div class="title"><h2>Tên sản phẩm:  {{product.nameProduct}}</h2></div>
+                          
                           <table class="table" *ngIf = 'product'>
                            
                             <thead>
                               <tr>
-                             
                                 <th scope="col">Chi tiết</th>
                                 <th scope="col">Số lượng tồn</th>
                                 <th scope="col">Giá</th>
@@ -39,9 +40,10 @@
                                 <td>{{item.price | currency: "VND" }}</td>
                                 <td><button type="button" class="btn btn-warning" (click) = "addToCart(item, product)">Thêm vào giỏ hàng</button></td>
                               </tr>
-                             
                             </tbody>
                           </table>
+                          <a class="btn" *ngIf = "cartService.cartItems.length >0" (click) = "muangay()" style="background-color: rgb(12, 248, 95);"  ><i class="fa fa-shopping-cart"></i>Thanh toán ngay</a>
+                          <a class="btn"  (click) = "tieptuc()" *ngIf = "cartService.cartItems.length >0" style="background-color: rgb(248, 12, 12);color: white; margin-left: 15px;"  ><i class="fa fa-shopping-cart"></i>Tiếp tục mua hàng</a>
                       </div>
                   </div>
               </div>
@@ -132,7 +134,7 @@
                               </div>
                               <div class="product-price">
                                   <h3><span></span>{{item.giaBanRa| currency: "VND" }}</h3>
-                                  <!-- <a class="btn"  (click) = "addToCart(product)" ><i class="fa fa-shopping-cart"></i>Mua ngay</a> -->
+                                
                               </div>
                           </div>
                       </div>

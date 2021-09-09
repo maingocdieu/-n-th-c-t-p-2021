@@ -5,16 +5,16 @@
     <!-- Breadcrumbs-->
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a href="#">Dashboard</a>
+        <a>Dashboard</a>
       </li>
-      <li class="breadcrumb-item active">Tables</li>
+      <li class="breadcrumb-item active">Danh sách sản phẩm</li>
     </ol>
 
     <!-- DataTables Example -->
     <div class="card mb-3">
       <div class="card-header">
         <i class="fas fa-table"></i>
-        Data Table Example</div>
+        Danh sách sản phẩm</div>
       <div class="card-body">
         <div class="table-responsive">
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" *ngIf = "listProduct">
@@ -22,20 +22,22 @@
               <tr>
                 <th  style="width: 200px;">Tên sản phẩm</th>
                 <th  style="width: 200px;">Ảnh sản phẩm</th>
-                <th  style="width: 200px;">Số lượng</th>
-                <th  style="width: 200px;">Giá sản phẩm</th>
                 <th  style="width: 200px;">Ngày tạo sản phẩm</th>
-                <th  style="width: 350px;">Hành đông</th>>
+                <th  style="width: 400px;">Mô tả sản phẩm</th>
+                <th>Còn bán</th>
+                <th  style="width: 350px;">Hành động</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let item of listProduct">
-                
                 <th>{{item.nameProduct}}</th>
                 <th><img src="http://localhost:8080/uploads/{{item.nameImage}}" style="width: 50px; height: 100%;" alt=""></th>
-                <th>{{item.soLuong}}</th>
-                <th>{{item.giaBanRa}}</th>
-                <th>{{item.createdDate}}</th>
+              
+                <th>{{item.createdDate | date: 'dd/MM/yyyy'}}</th>
+                <th>{{item.describe}}</th>
+                <th><input type="checkbox" class="checkbox" [(ngModel)]="item.status" name="list_name" style="    font-size: 28rem;
+                  width: 20px;
+                  height: 20px;;" value="{{item.id}}" (change)="updateStatus(item.id)"/></th>
                 <th><i class="far fa-edit" style="color: darkgreen; font-size:x-large;"  [routerLink]="['product/edit',item.id]"></i>
                   <i class="fas fa-backspace" style="color: darkgreen; font-size:x-large;margin-left: 40px;" (click) = "showConfirmDialog(item.id)"></i>
                   <button type="button"  class="btn btn-info ml-sm-4"  (click) = "openDialogDetailProduct(item.id)">Chi tiết</button>

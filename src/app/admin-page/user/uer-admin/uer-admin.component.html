@@ -42,8 +42,8 @@
                   <th>{{item.phone}}</th>
                   <th>{{item.createdDate | date: 'dd/MM/yyyy'}}</th>
                   <th>{{item.roles[0].name}}</th>
-                  <th><button>Cập nhật</button>
-                      <button>Xóa</button>
+                  <th><button (click) = "updateUser(item.id)">Cập nhật</button>
+                      <button (click) = "delete(item.id)">Xóa</button>
                   </th>
                  
               </tr>

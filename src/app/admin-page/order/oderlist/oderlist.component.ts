@@ -15,22 +15,22 @@ export class OderlistComponent implements OnInit {
   alertDeleteDialog: AlertComponent;
   currentItem = ' Bạn không được phép xóa';
   listOrder: any;
-
- 
+  listOrderCu: any;
+  p: number = 1;
   currentSelectedPage: number = 0;
   totalPages: number = 0;
   pageIndexes: Array<number> = [];
   page: number = 0;
-  constructor(public dialog: MatDialog,private productService: ProductService) { }
+  constructor(public dialog: MatDialog, private productService: ProductService) { }
   ngOnInit(): void {
-    this.getPage();
-   
+    this.getListSanPham();
+
   }
 
   getListSanPham() {
-    this.productService.getListOder().subscribe((data)=> {
-         this.listOrder = data;
-         console.log(this.listOrder);
+    this.productService.getListOder().subscribe((data) => {
+      this.listOrder = data;
+    this.listOrderCu = data;
     })
   }
 
@@ -42,17 +42,17 @@ export class OderlistComponent implements OnInit {
       data: {
         chitiet: item.listOderDetail,
         idOrder: item.id,
-        
+
       },
     });
   }
   deleteOrderList(item) {
-    if(item.listOderDetail.length>0) {
+    if (item.listOderDetail.length > 0) {
       this.currentItem = "Bạn không thể xóa"
       this.alertDeleteDialog.show();
     } else {
       this.productService.deleteOrder(item.id).subscribe(res => {
-        if(res == true) {
+        if (res == true) {
           this.getListSanPham();
         }
       });
@@ -61,7 +61,7 @@ export class OderlistComponent implements OnInit {
 
 
   getPaginationWithIndex(index) {
-  
+
     this.page = index;
     this.productService.getPageOder(this.page).subscribe((res) => {
       if (res === null) {
@@ -88,7 +88,7 @@ export class OderlistComponent implements OnInit {
   }
 
   nextClick() {
-    alert(this.currentSelectedPage)
+
     if (this.currentSelectedPage < this.totalPages - 1) {
       this.page = this.page + 1;
       this.getPage();
@@ -96,7 +96,7 @@ export class OderlistComponent implements OnInit {
   }
 
   previousClick() {
-    alert(this.currentSelectedPage)
+
     if (this.currentSelectedPage > 0) {
       this.page = this.page - 1;
       this.getPage();
@@ -104,7 +104,7 @@ export class OderlistComponent implements OnInit {
     }
   }
   getPage() {
-   
+
     this.productService.getPageOder(this.page).subscribe((res) => {
       if (res === null) {
         this.listOrder = null;
@@ -121,14 +121,41 @@ export class OderlistComponent implements OnInit {
 
 
 
- updateStatus(id,status) {
-   let  updatestatus = {
-        "id": id,
-        "status": !status 
-      }
-  this.productService.updateStatus(updatestatus).subscribe(res => {
-     this.getListSanPham();
-     window.location.reload();
-  })
+  updateStatus(id, status) {
+    let updatestatus = {
+      "id": id,
+      "status": !status
+    }
+    this.productService.updateStatus(updatestatus).subscribe(res => {
+      this.getListSanPham();
+
+    })
+  }
+
+  key:string = 'name';
+  reverse: boolean =false;
+  sort(key) {
+    this.key = key;
+    this.reverse = !this.reverse;
+  }
+
+  // search() {
+  //   if(this.name == "") {
+  //       this.listThongKe = this.listThongKecu;
+  //   } else {
+  //       this.listThongKe = this.listThongKe.filter(res => {
+  //         return res.name.toLocaleLowerCase().match(this.name.toLocaleLowerCase());
+  //       })
+  //   }
+  // }
+
+name = true;
+  search(name) {
+    this.listOrder = this.listOrderCu;
+    this.listOrder = this.listOrder.filter(res => {
+     return res.status === name 
+    });
+    console.log(this.listOrder);
 }
+
 }

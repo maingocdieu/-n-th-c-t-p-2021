@@ -38,8 +38,8 @@
                                           <p>{{tempCartItem.name}}</p>
                                       </div>
                                   </td>
-                                  <td>{{tempCartItem.color.nameColor}}, {{tempCartItem.size.namesize}} ,{{tempCartItem.supplier.nameSupplier}}</td>
-                                  <td>{{ tempCartItem.giaBanRa | currency: 'USD' }}</td>
+                                  <td>Màu sắc: <span style="color: red;">{{tempCartItem.color.nameColor}}</span>, Kích cỡ:  {{tempCartItem.size.namesize}}, Hãng sản xuất: {{tempCartItem.supplier.nameSupplier}}</td>
+                                  <td>{{ tempCartItem.giaBanRa | currency: 'VND' }}</td>
                                   <td>
                                       <div class="qty">
                                         <button  class="btn-minus" (click)="incrementQuantity(tempCartItem)"><i class="fa fa-plus"></i></button>
@@ -47,7 +47,7 @@
                                           <button class="btn-plus" (click)="decrementQuantity(tempCartItem)" ><i class="fa fa-minus"></i></button>
                                       </div>
                                   </td>
-                                  <td>{{ tempCartItem.quantity * tempCartItem.giaBanRa | currency: 'USD' }}</td>
+                                  <td>{{ tempCartItem.quantity * tempCartItem.giaBanRa | currency: 'VND' }}</td>
                                   <td><button (click)="remove(tempCartItem)"><i class="fa fa-trash"></i></button></td>
                               </tr>
                               
@@ -63,14 +63,17 @@
                       <div class="col-md-12">
                           <div class="cart-summary">
                               <div class="cart-content">
-                                  <h1>Cart Summary</h1>
+                                  <h1>Tổng đơn hàng</h1>
                                   <p>Số lượng<span>{{ totalQuantity }}</span></p>
-                                  <p>Tổng giá<span>{{ totalPrice | currency: 'USD' }}</span></p>
-                                  <h2>Grand Total<span></span></h2>
+                                  <p>Tổng giá<span>{{ totalPrice |  currency: 'VND' }}</span></p>
+                                  
                               </div>
                               <div class="cart-btn">
                                   <button (click) = "checkout()">Đặt hàng</button>
                               </div>
+                              <div class="cart-btn">
+                                <button (click) = "tieptuc()">Tiếp tục mua hàng</button>
+                            </div>
                           </div>
                       </div>
                   </div>

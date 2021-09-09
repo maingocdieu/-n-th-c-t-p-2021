@@ -35,6 +35,8 @@ export class LoginComponent implements OnInit {
         this.roles = this.tokenStorage.getUser().roles;
        if(this.roles[0] === "ROLE_USER") {
           this.router.navigateByUrl("");
+          // window.sessionStorage.setItem(this.tokenStorage.getUser().username, );
+
         } else if (this.roles[0] === "ROLE_ADMIN") {
           this.router.navigateByUrl("admin");
         }
